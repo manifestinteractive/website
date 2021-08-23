@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--
+ __  __   _   _  _ ___ ___ ___ ___ _____
+|  \/  | /_\ | \| |_ _| __| __/ __|_   _|
+| |\/| |/ _ \| .` || || _|| _|\__ \ | |
+|_|_ |_/_/_\_\_|\_|___|_| |___|___/_|_|_ _____   _____
+|_ _| \| |_   _| __| _ \  /_\ / __|_   _|_ _\ \ / / __|
+ | || .` | | | | _||   / / _ \ (__  | |  | | \ V /| _|
+|___|_|\_| |_| |___|_|_\/_/ \_\___| |_| |___| \_/ |___|
+
+GREETINGS, FROM MANIFEST INTERACTIVE
+
+Maybe we should be working on a project together ;)
+
+https://manifestintractive.com/contact
+
+-->
+<html dir="ltr" lang="en-US">
+  <head>
+    <!-- Required Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <!-- Mobile Specific Meta Tags -->
+    <meta name="viewport" content="initial-scale=1, viewport-fit=cover, width=device-width" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MI">
+    <meta name="application-name" content="MI">
+
+    <title>{{ title }}</title>
+
+    <meta name="description" content="{{ description }}">
+    <meta name="keywords" content="{{ keywords }}">
+    <meta name="cache-control" content="public">
+    <meta name="company" content="Manifest Interactive">
+    <meta name="googlebot" content="{{ package.robots }}">
+    <meta name="robots" content="noodp,noydir">
+    <meta name="robots" content="{{ package.robots }}">
+
+    <!-- Twitter META Info -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@mrmidi">
+    <meta property="twitter:title" content="{{ title }}">
+    <meta property="twitter:description" content="{{ description }}">
+    <meta property="twitter:creator" content="@mrmidi">
+    <meta property="twitter:image" content="{{ card_image }}">
+    <meta property="twitter:image:alt" content="{{ title }}">
+    <meta property="twitter:domain" content="https://manifestinteractive.com">
+
+    <!-- Open Graph protocol -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:url" content="https://www.manifestinteractive{{ canonical }}">
+    <meta property="og:image" content="{{ card_image }}">
+    <meta property="og:site_name" content="Manifest Interactive">
+    <meta property="og:description" content="{{ description }}">
+
+    <!-- Dublin Core Metadata -->
+    <meta name="dc:language" content="en_US">
+    <meta name="dc:title" content="{{ title }}">
+    <meta name="dc:source" content="https://manifestinteractive.com/">
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" href="{{ package.assetPath }}images/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="{{ package.assetPath }}images/apple/icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ package.assetPath }}images/apple/icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ package.assetPath }}images/apple/icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ package.assetPath }}images/apple/icon-144x144.png" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://manifestinteractive.com{{ canonical }}" />
+
+    <!-- Minimal CSS to prevent blocking page load -->
+    <style>
+    .pageloader{display:flex;justify-content:center;position:fixed;top:0;left:0;height:100%;width:100%;z-index:100000;overflow:hidden;pointer-events:none;background-color:#FFFFFF;transform:translateZ(1px);}.pageloader svg{width:100%;max-width:250px;transform:translateZ(1px);}#icon-rexy{transform:translate3d(40px, 0, 1px);animation: rexyIcon 0.15s ease-in forwards;}@keyframes rexyIcon {from {transform:translate3d(40px, 0, 1px)} to {transform:translate3d(0, 0, 1px)}}
+    @media (prefers-color-scheme: dark) {html,body{background-color: #1b1e28;}.pageloader{background-color: #1b1e28;}}
+    </style>
+
+    <!-- ASYNC load CSS and Init when complete -->
+    <script>var MI_READY=false;var CSS_LOADED=0;function checkReady(){CSS_LOADED++;if(CSS_LOADED===2){MI_READY=true;if(typeof MI !== 'undefined'){MI.init();}}};!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e,n=loadCSS.relpreload={};if(!(e="preload",function(t){return!(!t||!t.supports||!e)&&t.supports(e)})(document.createElement("link").relList)){if(n.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),n.bindMediaToggle=function(t){var e=t.media||"all";function n(){t.media=e}t.addEventListener?t.addEventListener("load",n):t.attachEvent&&t.attachEvent("onload",n),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(n,3e3)},n.poly=function(){if(!n.support())for(var e=t.document.getElementsByTagName("link"),a=0;a<e.length;a++){var o=e[a];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),n.bindMediaToggle(o))}},!n.support()){n.poly();var a=t.setInterval(n.poly,500);t.addEventListener?t.addEventListener("load",function(){n.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){n.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}}("undefined"!=typeof global?global:this);</script>
+
+    <!-- ASYNC Preload CSS -->
+    <link rel="preload" href="{{ package.assetPath }}css/plugins.{{ package.version }}.min.css{{ package.cacheBreak }}" as="style" onload="this.onload=null;this.rel='stylesheet';checkReady();">
+    <link rel="preload" href="{{ package.assetPath }}css/app.{{ package.version }}.min.css{{ package.cacheBreak }}" as="style" onload="this.onload=null;this.rel='stylesheet';checkReady();">
+
+    <!-- Fallback to load CSS if no scripts -->
+    <noscript>
+      <link rel="stylesheet" href="{{ package.assetPath }}css/plugins.{{ package.version }}.min.css{{ package.cacheBreak }}">
+      <link rel="stylesheet" href="{{ package.assetPath }}css/app.{{ package.version }}.min.css{{ package.cacheBreak }}">
+    </noscript>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ package.analytics }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ package.analytics }}');
+    </script>
+
+    {{> jsonld}}
+  </head>
+  <body class="loading">
+    <a class="skip-to-content-link" href="#main-wrapper">
+      Skip to Content
+    </a>
+
+    {{> pageloader}}
+
+    <!-- Page Wrapper -->
+    <div id="page-wrapper">
+      {{> header}}
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper">
+
+        <!-- Main Wrapper -->
+        <div id="main-wrapper">
+          {{> body}}
+        </div>
+        <!-- Main Wrapper Ends -->
+
+        {{> footer}}
+      </div>
+      <!-- Content Wrapper Ends -->
+    </div>
+    <!-- Page Wrapper Ends -->
+
+    <!-- Scripts -->
+    <script>var MI_ENV = '{{ package.env }}';</script>
+    <script defer src="{{ package.assetPath }}js/plugins.{{package.version}}.min.js{{ package.cacheBreak }}"></script>
+    <script defer src="{{ package.assetPath }}js/app.{{package.version}}.min.js{{ package.cacheBreak }}"></script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+---
+layout: default
+title: Search
+description: Search Results
+keywords: Manifest Interactive, Search, Results
+card_image: https://d14qmhpz0yq7x9.cloudfront.net/images/cards/rvw.jpg
+canonical: /search
+---
+
+<div class="container">
+  <div class="row">
+    <!-- Header -->
+    <div class="col-sm-12 col-md-offset-2 col-md-8 margin-top-60">
+      <h1 class="title">Search Results</h1>
+      <p class="body-text">Let's try to find what you are looking for.</p>
+      <hr class="sep-line">
+    </div>
+
+    <!-- Search Results -->
+    <div class="col-sm-12 col-md-offset-2 col-md-8 no-padding-left no-padding-right">
+      <div class="col-sm-12">
+        <ul id="search-results" data-search="{{ package.googleAPI }}" data-cx="{{ package.googleSearchCX }}"></ul>
+      </div>
+    </div>
+  </div>
+</div>
