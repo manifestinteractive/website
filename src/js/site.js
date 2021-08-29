@@ -6,10 +6,7 @@
     },
     interval: null,
     loaded: false,
-    moveTimeout: false,
     moveResetTimeout: false,
-    resize: null,
-    scroll: null,
     timeout: null,
 
     /**
@@ -106,9 +103,9 @@
       }
     },
 
-    backToTop: function(evt) {
+    backToTop: function (evt) {
       evt.preventDefault()
-      window.scrollTo(0, 0);
+      window.scrollTo(0, 0)
     },
 
     /**
@@ -274,7 +271,7 @@
       }, 125)
     },
 
-    scroll: function() {
+    scroll: function () {
       const $backToTop = $('#back-to-top')
 
       if ($(window).scrollTop() > 300 && !$backToTop.hasClass('show')) {
