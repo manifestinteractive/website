@@ -1,11 +1,13 @@
-(function() {
-  var MI = {
+(function () {
+  const MI = {
     devFlags: {
       debug: (MI_ENV !== 'production'),
       disableAnalytics: (MI_ENV === 'development')
     },
     interval: null,
     loaded: false,
+    moveTimeout: false,
+    moveResetTimeout: false,
     resize: null,
     scroll: null,
     timeout: null,
@@ -13,30 +15,38 @@
     /**
      * Bind Events to DOM Elements
      */
-    bindEvents: function() {
+    bindEvents: function () {
       // Cache Element Lookups
-      var $trackLinks = $('a[data-track], button[data-track]')
-      var $trackInput = $('input[data-track], textarea[data-track], select[data-track]')
-      var $hireMe = $('form.contact-form')
-      var $message = $('#mce-MESSAGE')
-      var $menuTrigger = $('#menu-trigger');
-      var $document = $(document);
+      const $backToTop = $('#back-to-top')
+      const $trackLinks = $('a[data-track], button[data-track]')
+      const $trackInput = $('input[data-track], textarea[data-track], select[data-track]')
+      const $hireMe = $('form.contact-form')
+      const $message = $('#mce-MESSAGE')
+      const $menuTrigger = $('#menu-trigger')
+      const $document = $(document)
+      const $window = $(window)
 
       // Remove Current Event Listeners
+      $backToTop.off('click.mi', MI.backToTop)
       $document.off('click.mi', MI.rexyBlink)
+      $document.off('mousemove.mi', MI.moveEyes)
       $trackLinks.off('click.mi', MI.trackLinks)
       $trackInput.off('change.mi', MI.trackInput)
       $hireMe.off('submit.mi', MI.contactUs)
       $message.off('keyup.mi', MI.updateCount)
       $menuTrigger.off('click.mi', MI.menuTrigger)
+      $window.off('scroll.mi', MI.scroll)
 
       // Add New Event Listeners
+      $backToTop.on('click.mi', MI.backToTop)
       $document.on('click.mi', MI.rexyBlink)
+      $document.on('mousemove.mi', MI.moveEyes)
       $trackLinks.on('click.mi', MI.trackLinks)
       $trackInput.on('change.mi', MI.trackInput)
       $hireMe.on('submit.mi', MI.contactUs)
       $message.on('keyup.mi', MI.updateCount)
       $menuTrigger.on('click.mi', MI.menuTrigger)
+      $window.on('scroll.mi', MI.scroll)
     },
 
     /**
@@ -46,8 +56,8 @@
      * @param label
      * @param value
      */
-    trackEvent: function(category, action, label, value) {
-      if (typeof gtag !== 'undefined' && !MI.devFlags.disableAnalytics) {
+    trackEvent: function (category, action, label, value) {
+      if (typeof gtag !== 'undefined' && !MI.devFlags.disableAnalytics && window.gdprConcent) {
         gtag('event', action, {
           event_category: category,
           event_label: label,
@@ -64,8 +74,8 @@
      * Setup Tracking on Links
      * @param evt
      */
-    trackLinks: function(evt) {
-      var data
+    trackLinks: function (evt) {
+      let data
 
       if (typeof evt.target !== 'undefined' && typeof evt.target.dataset !== 'undefined' && typeof evt.target.dataset.track !== 'undefined') {
         data = evt.target.dataset
@@ -82,8 +92,8 @@
      * Setup Tracking on Input
      * @param evt
      */
-    trackInput: function(evt) {
-      var data
+    trackInput: function (evt) {
+      let data
 
       if (typeof evt.target !== 'undefined' && typeof evt.target.dataset !== 'undefined' && typeof evt.target.dataset.track !== 'undefined') {
         data = evt.target.dataset
@@ -96,32 +106,37 @@
       }
     },
 
+    backToTop: function(evt) {
+      evt.preventDefault()
+      window.scrollTo(0, 0);
+    },
+
     /**
      * Process Contact Us & Careers Page Forms
      * @param evt
      */
-    contactUs: function(evt) {
+    contactUs: function (evt) {
       evt.preventDefault()
 
-      var $form = $('.contact-form')
-      var $error = $('.error-message')
-      var $errorText = $('.error-message-text')
+      const $form = $('.contact-form')
+      const $error = $('.error-message')
+      const $errorText = $('.error-message-text')
 
-      var $fname = $form.find('input[name=FNAME]')
-      var $lname = $form.find('input[name=LNAME]')
-      var $email = $form.find('input[name=EMAIL]')
-      var $message = $form.find('textarea[name=MESSAGE]')
+      const $fname = $form.find('input[name=FNAME]')
+      const $lname = $form.find('input[name=LNAME]')
+      const $email = $form.find('input[name=EMAIL]')
+      const $message = $form.find('textarea[name=MESSAGE]')
 
-      var formLabel = ($form.attr('id') === 'hireMe') ? 'Hire Me' : 'Contact Us'
+      const formLabel = ($form.attr('id') === 'hireMe') ? 'Hire Me' : 'Contact Us'
 
-      var action = $form.attr('action')
-      var method = $form.attr('method')
+      const action = $form.attr('action')
+      const method = $form.attr('method')
 
-      var valid = true
-      var errorMessage = ''
+      let valid = true
+      let errorMessage = ''
 
       // eslint-disable-next-line
-      var validEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      let validEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
       $error.hide()
       $('.has-error', $form).removeClass('has-error')
@@ -156,7 +171,7 @@
           cache: false,
           dataType: 'json',
           contentType: 'application/json; charset=utf-8',
-          error: function(err) {
+          error: function (err) {
             if (err.status === 404) {
               $errorText.html('Service is not available at the moment. Please check your internet connection or try again later.')
             } else {
@@ -167,7 +182,7 @@
 
             MI.trackEvent('Error', formLabel, JSON.stringify(err))
           },
-          success: function(data) {
+          success: function (data) {
             if (data.result !== 'success') {
               $errorText.html(data.msg)
               $error.show()
@@ -201,9 +216,9 @@
     /**
      * Initialize Website
      */
-    init: function() {
-      var $body = $('body')
-      var loading = ($body.hasClass('loading'))
+    init: function () {
+      const $body = $('body')
+      const loading = ($body.hasClass('loading'))
 
       MI.search()
 
@@ -212,10 +227,10 @@
       }
     },
 
-    menuTrigger: function() {
-      var $header = $('#header')
-      var $mainMenu = $('#main-menu')
-      var isOpen = $(this).hasClass('open')
+    menuTrigger: function () {
+      const $header = $('#header')
+      const $mainMenu = $('#main-menu')
+      const isOpen = $(this).hasClass('open')
 
       $header.toggleClass('display-menu')
       $mainMenu.toggleClass('display-menu')
@@ -224,42 +239,78 @@
       $(this).attr('aria-expanded', !isOpen)
     },
 
-    rexyBlink: function() {
-      var $blink = $('.blink')
+    moveEyes: function (e) {
+      // Don't bother animating eye tracking if no one can see them
+      if ($('#logo:hover').length !== 0 || !$('#logo').isInViewport() || window.innerWidth < 768) {
+        if (MI.moveResetTimeout) {
+          $('#logo-eyes, #left-eye, #right-eye').css('transform', 'translate(0, 0)').removeClass('moving')
+          clearTimeout(MI.moveResetTimeout)
+        }
+        return
+      }
+
+      requestAnimationFrame(function () {
+        const x = (-((window.innerWidth / 2) - e.pageX) / 160)
+        const y = (-((window.innerHeight / 2) - e.pageY) / 160)
+
+        $('#logo-eyes, #left-eye, #right-eye').addClass('moving').css('transform', `translate(${x}px, ${y}px)`)
+
+        if (MI.moveResetTimeout) {
+          clearTimeout(MI.moveResetTimeout)
+        }
+
+        MI.moveResetTimeout = setTimeout(function () {
+          $('#logo-eyes, #left-eye, #right-eye').css('transform', 'translate(0, 0)').removeClass('moving')
+        }, 3000)
+      })
+    },
+
+    rexyBlink: function () {
+      const $blink = $('.blink')
       $blink.toggleClass('hide')
 
-      setTimeout(function() {
+      setTimeout(function () {
         $blink.toggleClass('hide')
       }, 125)
+    },
+
+    scroll: function() {
+      const $backToTop = $('#back-to-top')
+
+      if ($(window).scrollTop() > 300 && !$backToTop.hasClass('show')) {
+        $backToTop.addClass('show')
+      } else if ($(window).scrollTop() <= 300 && $backToTop.hasClass('show')) {
+        $backToTop.removeClass('show')
+      }
     },
 
     /**
      * Generate Search Results Page
      * NOTE: This is for Google Only, but can be test by going to /search?q=Search+Term
      */
-    search: function() {
+    search: function () {
       if (window.location.pathname !== '/search') {
         return
       }
 
-      var $results = $('#search-results')
-      var gapi = $results.data('search')
-      var cx = $results.data('cx')
+      const $results = $('#search-results')
+      const gapi = $results.data('search')
+      const cx = $results.data('cx')
 
-      var getUrlVars = function() {
-        var vars = {}
+      const getUrlVars = function () {
+        const vars = {}
 
-        window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+        window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
           vars[key] = value
         })
 
         return vars
       }
 
-      var parseResults = function(results, query) {
+      const parseResults = function (results, query) {
         if (typeof results !== 'undefined' && results.items && results.items.length > 0) {
-          for (var i = 0; i < results.items.length; i++) {
-            var result = results.items[i]
+          for (let i = 0; i < results.items.length; i++) {
+            const result = results.items[i]
             $results.append(`<li><a href="${result.link}"><h2>${result.title}</h2></a><p>${result.snippet}</p></li>`)
           }
         } else {
@@ -267,18 +318,18 @@
         }
       }
 
-      var doSearch = function(query) {
+      const doSearch = function (query) {
         $.ajax({
           dataType: 'json',
           url: `https://www.googleapis.com/customsearch/v1/siterestrict?key=${gapi}&cx=${cx}&fields=items(title,snippet,link)&q=${query}`,
-          success: function(response) {
+          success: function (response) {
             $results.html('')
             parseResults(response, query)
           }
         })
       }
 
-      var params = getUrlVars()
+      const params = getUrlVars()
 
       if (params && params.q && params.q.length > 3) {
         doSearch(params.q)
@@ -288,22 +339,23 @@
     /**
      * Setup Graphic User Interface
      */
-    setupGUI: function() {
+    setupGUI: function () {
       MI.bindEvents()
       MI.standalone()
       MI.loaded = true
 
       // Add active class to menu
-      var path = window.location.pathname
-      $('#menu a').each(function() {
-        var href = $(this).attr('href')
+      const path = window.location.pathname
+      $('#menu a').each(function () {
+        const href = $(this).attr('href')
         if (href === path || (href === '/projects' && path.indexOf('project') > -1)) {
           $(this).addClass('active')
+          $(this).attr('tabindex', -1)
         }
       })
 
       // Load Grid if Present
-      var $portfolioGrid = $('#portfolio-container');
+      const $portfolioGrid = $('#portfolio-container')
       if ($portfolioGrid) {
         $portfolioGrid.cubeportfolio({
           filters: '#filters-container',
@@ -338,8 +390,8 @@
           lightboxDelegate: '.cbp-lightbox',
           lightboxGallery: true,
           lightboxTitleSrc: 'data-title',
-          lightboxCounter: '<div class="cbp-popup-lightbox-counter">{{current}} of {{total}}</div>',
-        });
+          lightboxCounter: '<div class="cbp-popup-lightbox-counter">{{current}} of {{total}}</div>'
+        })
       }
 
       // Hide Page Loader after setting up everything
@@ -354,11 +406,11 @@
      * if so, we want to prevent leaving the full screen experience unless clicking
      * an external link.
      */
-    standalone: function() {
+    standalone: function () {
       // Support Standalone mode and keep local links within app
       if (('standalone' in window.navigator) && window.navigator.standalone) {
-        $('a').on('click', function(e) {
-          var newLocation = $(this).attr('href')
+        $('a').on('click', function (e) {
+          const newLocation = $(this).attr('href')
           if (newLocation !== undefined && newLocation.substr(0, 1) !== '#' && $(this).attr('target') !== '_blank' && $(this).attr('data-lightbox') === undefined) {
             window.location = newLocation
             e.preventDefault()
@@ -371,10 +423,10 @@
      * Update Max Length Count
      * @param evt
      */
-    updateCount: function(evt) {
-      var message = $(evt.target).val()
-      var length = bytes(message)
-      var max = 255
+    updateCount: function (evt) {
+      const message = $(evt.target).val()
+      const length = bytes(message)
+      const max = 255
 
       $('#text-limit').text(length + ' / ' + max)
     }
@@ -383,8 +435,8 @@
   /**
    * Initialize on Page Load
    */
-  window.addEventListener('load', function(e) {
-    MI.interval = setInterval(function() {
+  window.addEventListener('load', function (e) {
+    MI.interval = setInterval(function () {
       if (MI_READY && !MI.loaded) {
         MI.init()
       }
@@ -394,7 +446,7 @@
   /**
    * Fix iOS Back Button Issue for Loading Screen
    */
-  window.addEventListener('pageshow', function(e) {
+  window.addEventListener('pageshow', function (e) {
     if (event.originalEvent && event.originalEvent.persisted) {
       window.location.reload()
     }
@@ -403,15 +455,15 @@
   /**
    * Remove Hover State for Touch Devices to Prevent Double Tap
    */
-  if (typeof window.orientation !== 'undefined' && ('ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0)) {
+  if (typeof window.orientation !== 'undefined' && ('ontouchstart' in document.documentElement || window.navigator.maxTouchPoints > 0 || window.navigator.msMaxTouchPoints > 0)) {
     try {
-      for (var si in document.styleSheets) {
-        var styleSheet = document.styleSheets[si]
+      for (const si in document.styleSheets) {
+        const styleSheet = document.styleSheets[si]
         if (!styleSheet.rules) {
           continue
         }
 
-        for (var ri = styleSheet.rules.length - 1; ri >= 0; ri--) {
+        for (let ri = styleSheet.rules.length - 1; ri >= 0; ri--) {
           if (!styleSheet.rules[ri].selectorText) {
             continue
           }
@@ -427,23 +479,23 @@
   /**
    * Detect if user is using Internet Explorer
    */
-  function detectIE() {
-    var ua = window.navigator.userAgent
+  function detectIE () {
+    const ua = window.navigator.userAgent
 
-    var msie = ua.indexOf('MSIE ')
+    const msie = ua.indexOf('MSIE ')
     if (msie > 0) {
       // IE 10 or older => return version number
       return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10)
     }
 
-    var trident = ua.indexOf('Trident/')
+    const trident = ua.indexOf('Trident/')
     if (trident > 0) {
       // IE 11 => return version number
-      var rv = ua.indexOf('rv:')
+      const rv = ua.indexOf('rv:')
       return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10)
     }
 
-    var edge = ua.indexOf('Edge/')
+    const edge = ua.indexOf('Edge/')
     if (edge > 0) {
       // Edge (IE 12+) => return version number
       return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10)
@@ -457,12 +509,12 @@
    * Get Byte Length from String
    * @param str
    */
-  function bytes(str) {
-    var bytes = 0;
-    var len = str.length;
-    var codePoint;
-    var next;
-    var i
+  function bytes (str) {
+    let bytes = 0
+    const len = str.length
+    let codePoint
+    let next
+    let i
 
     for (i = 0; i < len; i++) {
       codePoint = str.charCodeAt(i)
@@ -489,16 +541,16 @@
   /**
    * Custom Greetings for Nerds Like Me
    */
-  (function() {
+  (function () {
     if (typeof console !== 'undefined') {
-      var greetings = 'GREETINGS, FROM MANIFEST INTERACTIVE'
-      var ascii = '\n __  __   _   _  _ ___ ___ ___ ___ _____               \n|  \\/  | /_\\ | \\| |_ _| __| __/ __|_   _|              \n| |\\/| |/ _ \\| .` || || _|| _|\\__ \\ | |                \n|_|_ |_/_/_\\_\\_|\\_|___|_| |___|___/_|_|_ _____   _____ \n|_ _| \\| |_   _| __| _ \\  /_\\ / __|_   _|_ _\\ \\ / / __|\n | || .` | | | | _||   / / _ \\ (__  | |  | | \\ V /| _| \n|___|_|\\_| |_| |___|_|_\\/_/ \\_\\___| |_| |___| \\_/ |___|\n\n'
-      var link = 'Maybe we should be working on a project together ;)\n\n❯ https://manifestintractive.com/contact'
+      const greetings = 'GREETINGS, FROM MANIFEST INTERACTIVE'
+      const ascii = '\n __  __   _   _  _ ___ ___ ___ ___ _____               \n|  \\/  | /_\\ | \\| |_ _| __| __/ __|_   _|              \n| |\\/| |/ _ \\| .` || || _|| _|\\__ \\ | |                \n|_|_ |_/_/_\\_\\_|\\_|___|_| |___|___/_|_|_ _____   _____ \n|_ _| \\| |_   _| __| _ \\  /_\\ / __|_   _|_ _\\ \\ / / __|\n | || .` | | | | _||   / / _ \\ (__  | |  | | \\ V /| _| \n|___|_|\\_| |_| |___|_|_\\/_/ \\_\\___| |_| |___| \\_/ |___|\n\n'
+      const link = 'Maybe we should be working on a project together ;)\n\n❯ https://manifestintractive.com/contact'
 
       if (detectIE()) {
         console.log(ascii + '  ' + greetings + '\n\n' + link + '\n ')
       } else {
-        console.log('%c' + ascii + greetings + '\n\n%c' + link + '\n ', 'font-family: monospace; color: lime', null)
+        console.log('%c' + ascii + greetings + '\n\n%c' + link + '\n ', 'font-family: monospace; color: #7fcab1', null)
       }
     }
   })()

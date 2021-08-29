@@ -49,6 +49,12 @@ img {
 
 a {
   color: black;
+  font-weight: 400;
+
+  &:hover, &:focus {
+    color: black;
+    text-decoration: underline;
+  }
 }
 
 h1,
@@ -64,7 +70,7 @@ h6 {
 }
 
 ::selection {
-  background: #2c2c2c;
+  background: #1b1e28;
   color: #fff;
   text-shadow: none;
 }
@@ -97,6 +103,7 @@ textarea {
 -------------------------------------------------------------*/
 body {
   font-family: var(--font-family);
+  position: relative;
 }
 
 h1 {
@@ -184,6 +191,10 @@ blockquote {
 
 .no-padding-right {
   padding-right: 0 !important;
+}
+
+.no-margin {
+  margin: 0 !important;
 }
 
 .no-margin-top {
@@ -385,6 +396,50 @@ blockquote {
   transform: translateY(0%);
 }
 
+.gdpr-prompt {
+  display: none;
+}
+
+#back-to-top {
+  display: inline-block;
+  background-color: #1c1e29;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  transition: background-color .3s, opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  appearance: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+
+  &::after {
+    content: "\f366";
+    font-family: Ionicons;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2em;
+    line-height: 40px;
+    color: #FFFFFF;
+  }
+  &.show {
+    cursor: pointer;
+    opacity: 0.35;
+    visibility: visible;
+
+    &:hover, &:focus {
+      opacity: 1;
+    }
+  }
+}
+
 #header {
   &.standard {
     padding-top: 50px;
@@ -412,6 +467,12 @@ blockquote {
               transition: transform 0.25s ease-in-out;
               transform: translate(0, 0);
               transition-delay: 0.3s;
+              transform-style: preserve-3d;
+
+              &.moving {
+                transition: transform 0.05s ease-in-out;
+                transition-delay: 0s;
+              }
             }
 
             path.blink.hide {
@@ -497,19 +558,24 @@ blockquote {
             a {
               letter-spacing: 1px;
               display: block;
-              transition: color .3s;
+              transition: color .3s, border .3s;
               text-transform: uppercase;
               color: #666;
               line-height: 70px;
+              border-bottom: 2px inset transparent;
+              font-weight: 400;
 
               &.active {
                 color: #000;
                 font-weight: 600;
+                pointer-events: none;
+                border-bottom: 2px inset rgba(0, 0, 0, 0.25);
               }
 
               &:hover, &:focus {
                 text-decoration: none;
                 color: #000;
+                border-bottom: 2px inset #000;
               }
             }
           }
@@ -592,7 +658,7 @@ blockquote {
 .content-box {
   margin-bottom: 40px;
 
-  h4 {
+  h3 {
     small {
       font-size: 13px;
       font-weight: 300;
@@ -679,14 +745,15 @@ blockquote {
 
   li {
 
-    &,
+    color: rgba(0, 0, 0, 0.25);
+
     a {
       font-size: 16px;
       font-weight: 300;
       letter-spacing: 0;
       margin-top: 20px;
       margin-bottom: 0;
-      color: #848484;
+      color: var(--text-black);
     }
 
     a {
@@ -721,6 +788,12 @@ blockquote {
   }
 }
 
+h2.title + div.cta > p, h2.title > div > p > a {
+  font-size: 19px;
+  line-height: 24px;
+  font-weight: 300;
+}
+
 // Image Box
 .img-box {
   margin-bottom: 40px;
@@ -737,7 +810,7 @@ blockquote {
   }
 
   .box-content {
-    h4 {
+    h3 {
       margin-top: 35px;
     }
 
@@ -771,15 +844,15 @@ blockquote {
 
 // Description List
 .desc-list {
-  h6 {
-    margin-bottom: 5px;
+  h3 {
+    margin-bottom: 8px;
     font-weight: 400;
   }
 
   p {
-    line-height: 22px;
+    line-height: 24px;
     letter-spacing: 0;
-    margin-bottom: 0;
+    margin-bottom: 15px;
   }
 }
 
@@ -851,9 +924,11 @@ blockquote {
     a {
       background: #2c2c2c;
       color: #fff;
+      text-decoration: none;
 
       &:hover {
         background: #3e3e3e;
+        text-decoration: none;
       }
     }
   }
@@ -1415,6 +1490,7 @@ textarea {
 
     .post-img {
       display: block;
+      box-shadow: 0 0 0 4px rgba(132, 132, 132, .15);
 
       img {
         width: 100%;
@@ -1732,7 +1808,7 @@ textarea {
     Footer
 -------------------------------------------------------------*/
 #footer {
-  padding: 80px 0 40px 0;
+  padding: 80px 0;
 
   &.standard {
 
@@ -1743,7 +1819,7 @@ textarea {
 
     .copyrights {
       p {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 400;
         color: rgba(44, 44, 44, .7);
         margin-bottom: 0;
@@ -1755,19 +1831,19 @@ textarea {
       text-align: right;
 
       a {
-        font-size: 13px;
         font-weight: 400;
-        color: rgba(44, 44, 44, .7);
         display: inline-block;
-        margin-left: 15px;
+        margin-left: 20px;
+        opacity: 0.5;
+        transition: opacity 0.25s;
 
-        &:hover {
-          color: rgba(44, 44, 44, 1);
+        &:hover, &:focus {
           text-decoration: none;
+          opacity: 1;
         }
 
         i {
-          font-size: 18px;
+          font-size: 26px;
         }
       }
     }
@@ -1885,9 +1961,11 @@ textarea {
               padding-left: 20px;
               position: relative;
               line-height: 55px;
+              border-bottom: none;
 
               &:hover, &:focus, &.active {
                 color: black;
+                border-bottom: none !important;
               }
             }
           }
@@ -1911,7 +1989,7 @@ textarea {
   .cta p,
   .cta p a {
     font-size: 20px;
-    line-height: 24px;
+    line-height: 28px;
   }
 
   .sep-line {
@@ -1997,6 +2075,159 @@ textarea {
     font-size: 16px;
   }
 }
+@media all and (max-width:375px) {
+  // Heading
+  h1.heading {
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 6px;
+
+    b {
+      display: block;
+    }
+  }
+
+  h2.heading {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+html.gdpr-required {
+  .gdpr-prompt {
+    position: fixed;
+    display: block;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    color: var(--text-white);
+    z-index: 1000;
+    padding: 20px;
+
+    .gdpr-icon {
+      width: 50px;
+      display: inline-block;
+      height: 40px;
+      font-size: 40px;
+      vertical-align: top;
+      line-height: 50px;
+    }
+
+    .gdpr-wrapper {
+      display: inline-block;
+      max-width: calc(100% - 280px);
+      vertical-align: top;
+      width: 100%;
+
+      .gdpr-head {
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      .gdpr-body {
+        font-weight: 300;
+
+        a {
+          text-decoration: underline;
+          opacity: 1;
+          transition: color 0.25s;
+
+          &:hover, &:focus {
+            color: #7fcab1;
+          }
+        }
+      }
+    }
+
+    .gdpr-buttons {
+      display: inline-block;
+      white-space: nowrap;
+      float: right;
+      margin-top: 5px;
+      margin-right: 25px;
+
+      button {
+        appearance: none;
+        background-color: #FFF;
+        color: #000;
+        text-transform: uppercase;
+        opacity: 0.8;
+        transition: all 0.25s;
+        border: none;
+        padding: 8px 16px;
+        font-weight: 500;
+
+        &.gdpr-accept {
+          opacity: 1;
+          &:hover, &:focus {
+            background-color: #7fcab1;
+          }
+        }
+
+        &.gdpr-decline {
+          opacity: 0.5;
+          margin-right: 5px;
+
+          &:hover, &:focus {
+            background-color: #ca7f7f;
+          }
+        }
+
+        &.gdpr-close {
+          background-color: transparent;
+          color: #FFF;
+          position: absolute;
+          top: 0;
+          right: 0;
+          font-size: 20px;
+        }
+
+        &:hover, &:focus {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  #back-to-top {
+    display: none !important;
+  }
+}
+
+@media all and (max-width:600px) {
+  html.gdpr-required {
+    .gdpr-prompt {
+      .gdpr-icon {
+        width: 30px;
+        display: inline-block;
+        height: 20px;
+        font-size: 20px;
+        vertical-align: top;
+        line-height: 30px;
+      }
+
+      .gdpr-wrapper {
+        display: inline-block;
+        max-width: calc(100% - 70px);
+      }
+
+      .gdpr-buttons {
+        display: inline-block;
+        white-space: nowrap;
+        max-width: calc(100% - 70px);
+        text-align: left;
+        float: none;
+        margin-left: 35px;
+        margin-top: 15px;
+
+        button {
+          padding: 4px 12px;
+        }
+      }
+    }
+  }
+}
 
 @media all and (max-width:992px) {
 
@@ -2050,7 +2281,12 @@ textarea {
   }
 }
 
-@media (prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: dark) {
+  ::selection {
+    background: #fff;
+    color: #1b1e28;
+  }
+
   body {
     background: #1b1e28;
     color: var(--text-white);
@@ -2092,10 +2328,10 @@ textarea {
   }
 
   #logo svg {
-    .st0 {
-      fill: var(--text-white);
+    .logo-st0 {
+      fill: #fff;
     }
-    .st1 {
+    .logo-st1 {
       fill: #1b1e28;
     }
     .border, #logo-mask {
@@ -2104,6 +2340,21 @@ textarea {
 
     .background {
       fill: white;
+    }
+
+    // Firefox Fix
+    .logo-st0.mask {
+      fill: #1b1e28;
+    }
+  }
+
+  #back-to-top {
+    background-color: #FFF;
+
+    &::after {
+      content: "\f366";
+      font-family: Ionicons;
+      color: #1b1e28;
     }
   }
 
@@ -2130,6 +2381,22 @@ textarea {
     &.active, &:focus, &:hover {
       color: var(--text-white);
     }
+  }
+
+  #header.standard .header-wrapper #main-menu ul li a {
+    &.active {
+      color: #FFF;
+      border-bottom: 2px inset rgba(255, 255, 255, 0.25);
+    }
+
+    &:hover, &:focus {
+      color: #FFF;
+      border-bottom: 2px inset #FFF;
+    }
+  }
+
+  .client-list li {
+    color: rgba(255, 255, 255, 0.25);
   }
 
   .sep-line {
@@ -2177,7 +2444,11 @@ textarea {
     }
   }
 
-  @media all and (max-width:767px) {
+  svg path.dynamic-bg {
+    fill: rgba(255, 255, 255, 0.05);
+  }
+
+  @media screen and (max-width:767px) {
     #header.standard {
       border-bottom: 1px solid #323546;
 
@@ -2205,5 +2476,26 @@ textarea {
   textarea:focus,
   a:focus {
     outline-offset: unset;
+  }
+}
+
+/* Smooth scrolling IF user doesn't have a preference due to motion sensitivities */
+@media screen and (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Support Pretty Printed Pages */
+@media print {
+  .avoid-break {
+    break-inside: avoid;
+  }
+  .col-md-offset-2.col-md-8 {
+    margin-left: 0;
+    width: 100%;
+  }
+  #back-to-top, #footer, #main-menu {
+    display: none !important;
   }
 }

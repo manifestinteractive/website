@@ -222,6 +222,7 @@ gulp.task('lint-html', (done) => {
       'class-style': false,
       'doctype-first': false,
       'doctype-html5': true,
+      'id-class-no-ad': false,
       'id-class-style': false,
       'id-no-dup': true,
       'img-req-alt': true,

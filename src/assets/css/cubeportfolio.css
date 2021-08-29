@@ -620,9 +620,10 @@
 .cbp-caption-zoom .cbp-caption-activeWrap {
   opacity: 0;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.8);
   -webkit-transition: opacity .4s;
-  transition: opacity .4s; }
+  transition: opacity .4s;
+  backdrop-filter: blur(2px); }
 
 .cbp-caption-zoom .cbp-caption:hover .cbp-caption-activeWrap {
   opacity: 1; }

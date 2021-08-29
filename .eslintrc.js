@@ -16,12 +16,8 @@ module.exports = {
   globals: {
     '$': true,
     'jQuery': true,
-    'RVW_ENV': true,
-    'RVW_READY': true,
-    'ScrollReveal': true,
-    'Video': true,
-    'mapboxgl': true,
-    'MobileDetect': true,
+    'MI_ENV': true,
+    'MI_READY': true,
     'gtag': true
   }
 }
