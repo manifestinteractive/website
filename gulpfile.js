@@ -81,6 +81,7 @@ gulp.task('compile-js', (done) => {
     `${assetsPath}/js/bootstrap.js`,
     `${assetsPath}/js/cubeportfolio.min.js`,
     `${assetsPath}/js/owl.carousel.min.js`,
+    `${assetsPath}/js/overscroll.min.js`,
     `${assetsPath}/js/superfish.js`,
   ])
   .pipe(uglify())

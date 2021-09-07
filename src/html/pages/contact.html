@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Contact Manifest Interactive
-description:
-keywords:
-card_image: https://d14qmhpz0yq7x9.cloudfront.net/images/cards/rvw.jpg
+description: Want to get in touch? Write us a message, and we'll reply shortly.
+keywords: Manifest Interactive, Contact Us
+card_image: /assets/images/card.png
 canonical: /contact
 ---
 
@@ -16,26 +16,52 @@ canonical: /contact
       </div>
     </div>
     <div class="col-sm-8 col-md-8">
-      <form action="#" method="post" id="contact-form" class="contact-form">
-        <div class="form-process"></div>
-        <div class="col-sm-6 no-padding-left form-control-wrap">
-          <input id="name" class="form-control" placeholder="Name *" name="name" type="text">
-          <span class="name contact-error-msg">Please fill in the required field.</span>
+      <form id="contact-form" class="contact-form" action="https://manifestinteractive.us5.list-manage.com/subscribe/post-json?u=27a25269993d8a20eeb515305&id=e5b68f2479&c=?" method="post" name="contactUs" novalidate>
+        <!-- Contact Form -->
+        <div class="hide-on-success">
+          <!-- First Name -->
+          <div class="col-sm-3 no-padding-left form-control-wrap">
+            <label for="mce-FNAME">First Name</label>
+            <input id="mce-FNAME" class="form-control" type="text" name="FNAME" maxlength="50" required data-track data-category="Form" data-action="Contact First Name">
+            <span class="first-name contact-error-msg">Please fill in the required field.</span>
+          </div>
+
+          <!-- Last Name -->
+          <div class="col-sm-3 no-padding-left no-padding-right form-control-wrap">
+            <label for="mce-LNAME">Last Name</label>
+            <input id="mce-LNAME" class="form-control" type="text" name="LNAME" maxlength="50" required data-track data-category="Form" data-action="Contact Last Name">
+            <span class="last-name contact-error-msg">Please fill in the required field.</span>
+          </div>
+
+          <!-- Email Address -->
+          <div class="col-sm-6 no-padding-right form-control-wrap">
+            <label for="mce-EMAIL">Email Address</label>
+            <input id="mce-EMAIL" class="form-control" type="email" name="EMAIL" maxlength="50" required data-track data-category="Form" data-action="Contact Email Address">
+            <span class="email contact-error-msg">Please enter a valid email address.</span>
+          </div>
+
+          <!-- Message -->
+          <div class="col-sm-12 no-padding-left no-padding-right form-control-wrap">
+            <label for="mce-MESSAGE">Message <span id="text-limit" class="pull-right">0 / 255</span></label>
+            <textarea id="mce-MESSAGE" class="form-control" rows="5" name="MESSAGE" maxlength="255" required data-track data-category="Form" data-action="Contact Message"></textarea>
+            <span class="message contact-error-msg">Please fill in the required field.</span>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="form-submit">
+            <div class="col-sm-3 no-padding-left">
+              <button name="submit" type="submit" id="submit">Send</button>
+            </div>
+            <div class="col-sm-9 no-padding-right">
+              <!-- Form Messages -->
+              <div class="contact-failed"></div>
+            </div>
+          </div>
         </div>
-        <div class="col-sm-6 no-padding-right form-control-wrap">
-          <input id="Email" class="form-control" placeholder="Email *" name="email" type="email">
-          <span class="email contact-error-msg">Please enter a valid email address.</span>
+
+        <div class="contact-success">
+          <span class="ion-checkmark"></span>&nbsp; Message Sent Successfully.
         </div>
-        <div class="col-sm-12 no-padding-left no-padding-right form-control-wrap">
-          <textarea id="message" class="form-control" placeholder="Your Message *" name="message"></textarea>
-          <span class="message contact-error-msg">Please fill in the required field.</span>
-        </div>
-        <div class="form-submit">
-          <button name="submit" type="submit" id="submit">Send Message</button>
-        </div>
-        <br>
-        <span class="contact-failed">Message not sent, Please try again.</span>
-        <span class="contact-success">Message sent successfully.</span>
       </form>
     </div>
     <div class="col-sm-4 col-md-4">

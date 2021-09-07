@@ -6,7 +6,7 @@
   --font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --text-black: #2c2c2c;
   --text-white: #FFFFFF;
-  --accent-black: #1b1e28;
+  --accent-black: #1B1E28;
   --accent-blue: #566AAE;
   --accent-green: #7FCAB1;
 }
@@ -33,6 +33,10 @@
 /*-----------------------------------------------------------
     Basic
 -------------------------------------------------------------*/
+html, body {
+  height: 100%;
+}
+
 dl,
 dt,
 dd,
@@ -88,6 +92,38 @@ a:focus {
   outline: 2px solid #7AACFE !important; /* for non-webkit browsers */
   outline: 5px auto -webkit-focus-ring-color !important;
   outline-offset: 4px;
+}
+
+input, select, textarea {
+  &::selection {
+    background: #1b1e28;
+    color: #fff;
+    text-shadow: none;
+  }
+}
+
+
+
+.has-error {
+  input:active,
+  button:active,
+  select:active,
+  textarea:active,
+  a:active,
+  input:focus,
+  button:focus,
+  select:focus,
+  textarea:focus,
+  a:focus {
+    outline: 2px solid #e03131 !important; /* for non-webkit browsers */
+    outline: 5px auto #e03131 !important;
+    outline-offset: 4px;
+  }
+
+  .form-control {
+    border-color: #e03131 !important;
+    box-shadow: inset 0 0 0 2px #e03131 !important;
+  }
 }
 
 input,
@@ -568,7 +604,6 @@ blockquote {
               &.active {
                 color: #000;
                 font-weight: 600;
-                pointer-events: none;
                 border-bottom: 2px inset rgba(0, 0, 0, 0.25);
               }
 
@@ -736,7 +771,7 @@ blockquote {
   list-style-type: none;
 
   li {
-
+    line-height: 30px;
     color: rgba(0, 0, 0, 0.25);
 
     a {
@@ -746,6 +781,7 @@ blockquote {
       margin-top: 20px;
       margin-bottom: 0;
       color: var(--text-black);
+      font-size: 18px;
     }
 
     a {
@@ -844,7 +880,7 @@ h2.title + div.cta > p, h2.title > div > p > a {
   p {
     line-height: 24px;
     letter-spacing: 0;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
   }
 }
 
@@ -1190,7 +1226,7 @@ h2.title + div.cta > p, h2.title > div > p > a {
 .cbp-popup-lightbox .cbp-popup-next,
 .cbp-popup-lightbox .cbp-popup-prev,
 .cbp-popup-lightbox .cbp-popup-close {
-  background-image: url('images/cbp-sprite.png');
+  background-image: url('../images/cbp-sprite.png');
 }
 
 // Title & Subtitle
@@ -1396,10 +1432,11 @@ textarea {
   .contact-success,
   .contact-failed {
     color: var(--text-black);
-    margin-top: 15px;
-    font-size: 18px;
-    font-weight: 400;
+    margin-bottom: 35px;
+    font-size: 24px;
+    font-weight: 300;
     display: none;
+    line-height: 54px;
   }
 
   .contact-failed {
@@ -1411,19 +1448,25 @@ textarea {
   }
 
   .contact-success {
+    color: var(--accent-green);
     &.validated {
       display: block !important;
     }
   }
-}
 
-.form-process {
-  display: none;
-  position: absolute;
-  z-index: 3;
-  width: 100%;
-  height: 100%;
-  background: url(images/preloader.gif) center center no-repeat rgba(255, 255, 255, 0.7);
+  label {
+    width: 100%;
+  }
+
+  #submit {
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  #text-limit {
+    font-weight: 300;
+    opacity: 0.75;
+  }
 }
 
 .contact-info {
@@ -1772,29 +1815,6 @@ textarea {
   }
 }
 
-// Comment Form
-.comment-respond {
-  margin-top: 65px;
-
-  .comment-reply-title {
-    margin-bottom: 30px;
-  }
-
-  .comment-form {
-    .text-fields {
-      .form-control {
-        display: inline-block;
-        float: left;
-        width: 30.7%;
-        margin-right: 3.9%;
-
-        &:last-of-type {
-          margin-right: 0;
-        }
-      }
-    }
-  }
-}
 
 /*-----------------------------------------------------------
     Footer
@@ -1855,6 +1875,9 @@ textarea {
     svg {
       max-height: 40px;
     }
+  }
+  .contact-failed {
+    font-size: 18px;
   }
 }
 /*-----------------------------------------------------------
@@ -2012,6 +2035,23 @@ textarea {
         padding: 0;
       }
     }
+  }
+
+  .form-submit > div {
+    padding: 0;
+  }
+
+  .contact-failed {
+    margin-top: 20px;
+  }
+
+  .contact-success {
+    font-size: 20px;
+  }
+
+  .form-control-wrap {
+    padding-left: 0;
+    padding-right: 0;
   }
 
   // Footer
@@ -2279,6 +2319,32 @@ html.gdpr-required {
     color: #1b1e28;
   }
 
+  .has-error {
+    input:active,
+    button:active,
+    select:active,
+    textarea:active,
+    a:active,
+    input:focus,
+    button:focus,
+    select:focus,
+    textarea:focus,
+    a:focus {
+      outline: 2px solid #ff8484 !important; /* for non-webkit browsers */
+      outline: 5px auto #ff8484 !important;
+      outline-offset: 4px;
+    }
+
+    .form-control {
+      border-color: #ff8484 !important;
+      box-shadow: inset 0 0 0 2px #ff8484 !important;
+    }
+  }
+
+  .contact-form .contact-failed {
+    color: #ff8484;
+  }
+
   body {
     background: #1b1e28;
     color: var(--text-white);
@@ -2389,6 +2455,7 @@ html.gdpr-required {
 
   .client-list li {
     color: rgba(255, 255, 255, 0.25);
+    line-height: 30px;
   }
 
   .sep-line {

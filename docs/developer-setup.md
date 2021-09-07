@@ -105,3 +105,11 @@ Graphics
 ---
 
 The awesome SVGs used in this project came from [Scale](https://2.flexiple.com/scale/multi-color-illustrations).
+
+#### Accent Colors:
+
+COLOR   | HEX                                                                       | WEBSITE CSS
+-------:|:-------------------------------------------------------------------------:|:---------------------
+COLOR 1 | ![#1B1E28](https://via.placeholder.com/15/1B1E28/000000?text=+) `#1B1E28` | `var(--accent-black)`
+COLOR 2 | ![#566AAE](https://via.placeholder.com/15/566AAE/000000?text=+) `#566AAE` | `var(--accent-blue)`
+COLOR 3 | ![#7FCAB1](https://via.placeholder.com/15/7FCAB1/000000?text=+) `#7FCAB1` | `var(--accent-green)`

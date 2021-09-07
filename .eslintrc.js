@@ -18,6 +18,7 @@ module.exports = {
     'jQuery': true,
     'MI_ENV': true,
     'MI_READY': true,
+    'Overscroll': true,
     'gtag': true
   }
 }

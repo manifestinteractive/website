@@ -8,6 +8,7 @@
     loaded: false,
     moveResetTimeout: false,
     timeout: null,
+    typed: 0,
 
     /**
      * Bind Events to DOM Elements
@@ -17,7 +18,7 @@
       const $backToTop = $('#back-to-top')
       const $trackLinks = $('a[data-track], button[data-track]')
       const $trackInput = $('input[data-track], textarea[data-track], select[data-track]')
-      const $hireMe = $('form.contact-form')
+      const $contactUs = $('form.contact-form')
       const $message = $('#mce-MESSAGE')
       const $menuTrigger = $('#menu-trigger')
       const $document = $(document)
@@ -29,7 +30,7 @@
       $document.off('mousemove.mi', MI.moveEyes)
       $trackLinks.off('click.mi', MI.trackLinks)
       $trackInput.off('change.mi', MI.trackInput)
-      $hireMe.off('submit.mi', MI.contactUs)
+      $contactUs.off('submit.mi', MI.contactUs)
       $message.off('keyup.mi', MI.updateCount)
       $menuTrigger.off('click.mi', MI.menuTrigger)
       $window.off('scroll.mi', MI.scroll)
@@ -40,10 +41,13 @@
       $document.on('mousemove.mi', MI.moveEyes)
       $trackLinks.on('click.mi', MI.trackLinks)
       $trackInput.on('change.mi', MI.trackInput)
-      $hireMe.on('submit.mi', MI.contactUs)
+      $contactUs.on('submit.mi', MI.contactUs)
       $message.on('keyup.mi', MI.updateCount)
       $menuTrigger.on('click.mi', MI.menuTrigger)
       $window.on('scroll.mi', MI.scroll)
+
+      const overscroll = new Overscroll()
+      overscroll.init('/assets/images/rexi.png')
     },
 
     /**
@@ -103,6 +107,10 @@
       }
     },
 
+    /**
+     * Return to Top of Page
+     * @param evt
+     */
     backToTop: function (evt) {
       evt.preventDefault()
       window.scrollTo(0, 0)
@@ -116,15 +124,12 @@
       evt.preventDefault()
 
       const $form = $('.contact-form')
-      const $error = $('.error-message')
-      const $errorText = $('.error-message-text')
+      const $error = $('.contact-failed')
 
       const $fname = $form.find('input[name=FNAME]')
       const $lname = $form.find('input[name=LNAME]')
       const $email = $form.find('input[name=EMAIL]')
       const $message = $form.find('textarea[name=MESSAGE]')
-
-      const formLabel = ($form.attr('id') === 'hireMe') ? 'Hire Me' : 'Contact Us'
 
       const action = $form.attr('action')
       const method = $form.attr('method')
@@ -137,29 +142,44 @@
 
       $error.hide()
       $('.has-error', $form).removeClass('has-error')
+      $('.contact-error-msg').hide()
 
       if ($fname.val() === '') {
         valid = false
         errorMessage = 'First Name cannot be blank.'
-        $fname.closest('.control').addClass('has-error')
+        $fname.closest('.form-control-wrap').addClass('has-error')
+        $fname.closest('.contact-error-msg').fadeIn()
         $fname.focus()
       } else if ($lname.val() === '') {
         valid = false
         errorMessage = 'Last Name cannot be blank.'
-        $lname.closest('.control').addClass('has-error')
+        $lname.closest('.form-control-wrap').addClass('has-error')
+        $lname.closest('.contact-error-msg').fadeIn()
         $lname.focus()
       } else if (!validEmail.test($email.val())) {
         valid = false
         errorMessage = 'Email Address is Invalid.'
-        $email.closest('.control').addClass('has-error')
+        $email.closest('.form-control-wrap').addClass('has-error')
+        $email.closest('.contact-error-msg').fadeIn()
         $email.focus()
       } else if ($message.val() === '') {
         valid = false
         errorMessage = 'Message cannot be blank.'
-        $message.closest('.control').addClass('has-error')
+        $message.closest('.form-control-wrap').addClass('has-error')
+        $message.closest('.contact-error-msg').fadeIn()
         $message.focus()
       }
 
+      // Check for Copy Paste / Bots
+      const message = $message.val()
+      const length = bytes(message)
+
+      if (valid && (MI.typed === 0 || MI.typed > 255 || MI.typed < length)) {
+        errorMessage = 'SPAM? Automation Detected.'
+        valid = false
+      }
+
+      // Check for Valid Form
       if (valid) {
         $.ajax({
           type: method,
@@ -170,40 +190,40 @@
           contentType: 'application/json; charset=utf-8',
           error: function (err) {
             if (err.status === 404) {
-              $errorText.html('Service is not available at the moment. Please check your internet connection or try again later.')
+              $error.html('<span class="ion-android-warning"></span>&nbsp; Service is not available at the moment. Please check your internet connection or try again later.')
             } else {
-              $errorText.html('Oops. Looks like something went wrong. Please try again later.')
+              $error.html('<span class="ion-android-warning"></span>&nbsp; Oops. Looks like something went wrong. Please try again later.')
             }
 
             $error.show()
 
-            MI.trackEvent('Error', formLabel, JSON.stringify(err))
+            MI.trackEvent('Error', 'Contact Us', JSON.stringify(err))
           },
           success: function (data) {
             if (data.result !== 'success') {
-              $errorText.html(data.msg)
+              $error.html('<span class="ion-android-warning"></span>&nbsp; ' + data.msg)
               $error.show()
               $('.hide-on-success').hide()
 
-              MI.trackEvent('Error', formLabel, data.msg)
+              MI.trackEvent('Error', 'Contact Us', data.msg)
 
               if (data.msg.indexOf('is already subscribed') > -1) {
-                MI.trackEvent(formLabel, 'MailChimp Notice', 'Contacted Us Email Already Subscribed')
+                MI.trackEvent('Contact Us', 'MailChimp Notice', 'Contacted Us Email Already Subscribed')
               } else {
-                MI.trackEvent(formLabel, 'MailChimp Error', data.msg)
+                MI.trackEvent('Contact Us', 'MailChimp Error', data.msg)
               }
             } else {
               $form.trigger('reset')
-              $('.success-msg').show()
+              $('.contact-success').show()
               $('.hide-on-success').hide()
 
-              MI.trackEvent(formLabel, 'MailChimp Success', 'User Contacted Us')
+              MI.trackEvent('Contact Us', 'MailChimp Success', 'User Contacted Us')
             }
           }
         })
       } else {
-        MI.trackEvent('Error', 'Hire Me Form', errorMessage)
-        $errorText.html(errorMessage)
+        MI.trackEvent('Error', 'Contact Us Form', errorMessage)
+        $error.html('<span class="ion-android-warning"></span>&nbsp; ' + errorMessage)
         $error.show()
       }
 
@@ -425,6 +445,12 @@
       const length = bytes(message)
       const max = 255
 
+      MI.typed += 1
+
+      if (length === 0) {
+        MI.typed = 0
+      }
+
       $('#text-limit').text(length + ' / ' + max)
     }
   }
@@ -542,7 +568,7 @@
     if (typeof console !== 'undefined') {
       const greetings = 'GREETINGS, FROM MANIFEST INTERACTIVE'
       const ascii = '\n __  __   _   _  _ ___ ___ ___ ___ _____               \n|  \\/  | /_\\ | \\| |_ _| __| __/ __|_   _|              \n| |\\/| |/ _ \\| .` || || _|| _|\\__ \\ | |                \n|_|_ |_/_/_\\_\\_|\\_|___|_| |___|___/_|_|_ _____   _____ \n|_ _| \\| |_   _| __| _ \\  /_\\ / __|_   _|_ _\\ \\ / / __|\n | || .` | | | | _||   / / _ \\ (__  | |  | | \\ V /| _| \n|___|_|\\_| |_| |___|_|_\\/_/ \\_\\___| |_| |___| \\_/ |___|\n\n'
-      const link = 'Maybe we should be working on a project together ;)\n\n❯ https://manifestintractive.com/contact'
+      const link = 'Maybe we should be working on a project together ;)\n\n❯ https://www.manifestintractive.com/contact'
 
       if (detectIE()) {
         console.log(ascii + '  ' + greetings + '\n\n' + link + '\n ')

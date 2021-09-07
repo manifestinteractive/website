@@ -44,23 +44,23 @@ https://manifestintractive.com/contact
     <meta property="twitter:title" content="{{ title }}">
     <meta property="twitter:description" content="{{ description }}">
     <meta property="twitter:creator" content="@mrmidi">
-    <meta property="twitter:image" content="{{ card_image }}">
+    <meta property="twitter:image" content="{{ package.base }}{{ card_image }}">
     <meta property="twitter:image:alt" content="{{ title }}">
-    <meta property="twitter:domain" content="https://manifestinteractive.com">
+    <meta property="twitter:domain" content="{{ package.base }}">
 
     <!-- Open Graph protocol -->
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ title }}">
-    <meta property="og:url" content="https://www.manifestinteractive{{ canonical }}">
-    <meta property="og:image" content="{{ card_image }}">
+    <meta property="og:url" content="{{ package.base }}{{ canonical }}">
+    <meta property="og:image" content="{{ package.base }}{{ card_image }}">
     <meta property="og:site_name" content="Manifest Interactive">
     <meta property="og:description" content="{{ description }}">
 
     <!-- Dublin Core Metadata -->
     <meta name="dc:language" content="en_US">
     <meta name="dc:title" content="{{ title }}">
-    <meta name="dc:source" content="https://manifestinteractive.com/">
+    <meta name="dc:source" content="{{ package.base }}/">
 
     <!-- Icons -->
     <link rel="icon" type="image/png" href="{{ package.assetPath }}images/favicon.ico">
@@ -70,7 +70,7 @@ https://manifestintractive.com/contact
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ package.assetPath }}images/apple/icon-144x144.png" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://manifestinteractive.com{{ canonical }}" />
+    <link rel="canonical" href="{{ package.base }}{{ canonical }}" />
 
     <!-- Minimal CSS to prevent blocking page load -->
     <style>

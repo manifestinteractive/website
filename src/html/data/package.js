@@ -5,6 +5,7 @@ const isProd = env === 'production'
 
 module.exports = {
   analytics: isProd ? 'G-0VFCSYJM7Z' : 'G-C2E9TKCD53',
+  base: isProd ? 'https://www.manifestinteractive.com' : 'https://dev.manifestinteractive.com',
   googleAPI: isProd ? 'AIzaSyAZbGCa28EOzyhBzK3mH28MU5w3PLOVc9Q' : 'AIzaSyDH_Vnp0IaAmFuCx0orTjIJsxkAlM03B6A',
   googleSearchCX: '278575f6a5e288960',
   assetPath: isProd ? 'https://d14qmhpz0yq7x9.cloudfront.net/' : '/assets/',
