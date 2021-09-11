@@ -5,3 +5,4 @@ npm-debug.log
 dist
 aws.json
 *.code-workspace
+src/assets/pdf/*.docx

@@ -92,8 +92,7 @@
   .cbp .cbp-item {
     list-style-type: none;
     margin: 0;
-    padding: 0;
-    overflow: hidden; }
+    padding: 0; }
   .cbp img {
     display: block;
     border: 0;
@@ -120,7 +119,6 @@
     z-index: 0; }
 
 .cbp-wrapper-outer {
-  overflow: hidden;
   position: relative;
   margin: 0 auto; }
 
@@ -446,7 +444,7 @@
 .cbp-caption-minimal .cbp-caption-activeWrap {
   top: 0;
   background-color: black;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(27, 30, 40, .95);
   opacity: 0; }
 
 .cbp-caption-minimal .cbp-caption:hover .cbp-caption-activeWrap {
@@ -620,7 +618,7 @@
 .cbp-caption-zoom .cbp-caption-activeWrap {
   opacity: 0;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   -webkit-transition: opacity .4s;
   transition: opacity .4s;
   backdrop-filter: blur(2px); }
@@ -2234,7 +2232,8 @@
     outline: 0 none; }
 
 .cbp-popup-lightbox {
-  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(3px);
+  background: rgba(27, 30, 40, .95);
   display: flex;
   justify-content: center;
   align-items: center; }

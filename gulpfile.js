@@ -140,6 +140,7 @@ gulp.task('compile-scss', (done) => {
 gulp.task('copy', (done) => {
   gulp.src(['src/html/*.txt']).pipe(gulp.dest('dist/'))
   gulp.src(['src/assets/fonts/**/*']).pipe(gulp.dest('dist/assets/fonts/'))
+  gulp.src(['src/assets/pdf/*.pdf']).pipe(gulp.dest('dist/assets/pdf/'))
   done()
 })
 

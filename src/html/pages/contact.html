@@ -22,21 +22,21 @@ canonical: /contact
           <!-- First Name -->
           <div class="col-sm-3 no-padding-left form-control-wrap">
             <label for="mce-FNAME">First Name</label>
-            <input id="mce-FNAME" class="form-control" type="text" name="FNAME" maxlength="50" required data-track data-category="Form" data-action="Contact First Name">
+            <input id="mce-FNAME" class="form-control" type="text" name="FNAME" maxlength="50" autocomplete="given-name" required data-track data-category="Form" data-action="Contact First Name">
             <span class="first-name contact-error-msg">Please fill in the required field.</span>
           </div>
 
           <!-- Last Name -->
           <div class="col-sm-3 no-padding-left no-padding-right form-control-wrap">
             <label for="mce-LNAME">Last Name</label>
-            <input id="mce-LNAME" class="form-control" type="text" name="LNAME" maxlength="50" required data-track data-category="Form" data-action="Contact Last Name">
+            <input id="mce-LNAME" class="form-control" type="text" name="LNAME" maxlength="50" autocomplete="family-name" required data-track data-category="Form" data-action="Contact Last Name">
             <span class="last-name contact-error-msg">Please fill in the required field.</span>
           </div>
 
           <!-- Email Address -->
           <div class="col-sm-6 no-padding-right form-control-wrap">
             <label for="mce-EMAIL">Email Address</label>
-            <input id="mce-EMAIL" class="form-control" type="email" name="EMAIL" maxlength="50" required data-track data-category="Form" data-action="Contact Email Address">
+            <input id="mce-EMAIL" class="form-control" type="email" name="EMAIL" maxlength="255" autocomplete="email" required data-track data-category="Form" data-action="Contact Email Address">
             <span class="email contact-error-msg">Please enter a valid email address.</span>
           </div>
 
