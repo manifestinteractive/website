@@ -17,6 +17,7 @@ const sitemap = require('gulp-sitemap')
 const sourcemaps = require('gulp-sourcemaps')
 const uglify = require('gulp-uglify')
 const version = require('./package.json').version
+const workboxBuild = require('workbox-build')
 
 const assetsPath =  'src/assets/'
 const port = process.env.RVW_SERVER_PORT || 8081
@@ -138,7 +139,11 @@ gulp.task('compile-scss', (done) => {
 
 // Copy static assets
 gulp.task('copy', (done) => {
-  gulp.src(['src/html/*.txt']).pipe(gulp.dest('dist/'))
+  gulp.src([
+    'src/html/.htaccess',
+    'src/html/manifest.json',
+    'src/html/*.txt'
+  ]).pipe(gulp.dest('dist/'))
   gulp.src(['src/assets/fonts/**/*']).pipe(gulp.dest('dist/assets/fonts/'))
   gulp.src(['src/assets/pdf/*.pdf']).pipe(gulp.dest('dist/assets/pdf/'))
   done()
@@ -148,6 +153,34 @@ gulp.task('copy', (done) => {
 gulp.task('copy-images', (done) => {
   gulp.src('src/images/**/*').pipe(gulp.dest('dist/assets/images/'))
   done()
+})
+
+// Compile Service Worker
+gulp.task('compile-sw', (done) => {
+  fancyLog(`Creating '${colors.cyan('compile-sw')}'... ${colors.dim('( This may take a second )')}`)
+
+  const buildSW = () => {
+    return workboxBuild.generateSW({
+      mode: process.env.NODE_ENV,
+      globDirectory: './dist',
+      globPatterns: [
+        '**/*.{html,json,js,css}',
+      ],
+      swDest: './dist/sw.js',
+      runtimeCaching: [{
+        urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+        handler: 'CacheFirst',
+        options: {
+          cacheName: 'images'
+        },
+      }],
+    });
+  };
+
+  setTimeout(function(){
+    buildSW()
+    done()
+  }, 5000)
 })
 
 // Copy Theme js to production site
@@ -290,5 +323,5 @@ gulp.task('watch', (done) => {
 })
 
 // Main Gulp Tasks
-gulp.task('build', gulp.series('clean', 'copy', 'compile-js', 'compile-css', 'copy-js', 'compile-scss', 'compile-html', 'copy-images'))
+gulp.task('build', gulp.series('clean', 'copy', 'compile-js', 'compile-css', 'copy-js', 'compile-scss', 'compile-html', 'copy-images', 'compile-sw'))
 gulp.task('default', gulp.series('build', 'watch', 'server'))

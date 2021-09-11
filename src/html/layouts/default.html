@@ -23,6 +23,7 @@ https://manifestintractive.com/contact
 
     <!-- Mobile Specific Meta Tags -->
     <meta name="viewport" content="initial-scale=1, viewport-fit=cover, width=device-width" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Manifest">
@@ -62,6 +63,9 @@ https://manifestintractive.com/contact
     <meta name="dc:language" content="en_US">
     <meta name="dc:title" content="{{ title }}">
     <meta name="dc:source" content="{{ package.base }}/">
+
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json" />
 
     <!-- Icons -->
     <link rel="icon" type="image/png" href="{{ package.assetPath }}images/favicon.ico">
@@ -138,5 +142,16 @@ https://manifestintractive.com/contact
     <script>var MI_ENV = '{{ package.env }}';</script>
     <script defer src="{{ package.assetPath }}js/plugins.{{package.version}}.min.js{{ package.cacheBreak }}"></script>
     <script defer src="{{ package.assetPath }}js/app.{{package.version}}.min.js{{ package.cacheBreak }}"></script>
+
+    <script>
+    // Load Service Worker for PWA
+      if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js').then(function(reg) {
+            console.log('Successfully registered service worker', reg);
+        }).catch(function(err) {
+            console.warn('Error whilst registering service worker', err);
+        });
+      }
+    </script>
   </body>
 </html>

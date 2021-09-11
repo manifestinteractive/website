@@ -74,7 +74,8 @@
     "npm": "^7.20.5",
     "npm-scripts-help": "^0.8.0",
     "panini": "^1.7.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "workbox-build": "^6.3.0"
   },
   "scriptshelp": {
     "help-message": "Manifest Interactive Website NPM Commands:",
