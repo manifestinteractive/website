@@ -13,6 +13,7 @@ module.exports = {
   cacheBreak: isProd ? '' : `?ac${new Date().getTime()}`,
   currentYear: date.getFullYear(),
   currentDate: date.toISOString().slice(0, 10),
+  publishedDate: date.toISOString(),
   env: env,
   robots: isProd ? 'index,follow' : 'noindex,nofollow',
   version: version

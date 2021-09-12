@@ -1,278 +1,142 @@
 <!-- JSON+LD Data -->
 <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "{{ package.base }}/#website",
-        "url": "{{ package.base }}/",
-        "name": "Manifest Interactive",
-        "description": "Manifest Interactive is a Web Development Agency that has been building custom web applications for over twenty years.",
-        "publisher": {
-          "@id": "{{ package.base }}/#organization"
-        },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "{{ package.base }}/search?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        },
-        "inLanguage": "en-US"
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "{{ package.base }}/#website",
+      "url": "{{ package.base }}/",
+      "name": "Manifest Interactive",
+      "description": "Manifest Interactive is a Web Development Agency that has been building custom web applications for over twenty years.",
+      "publisher": {
+        "@id": "{{ package.base }}/#organization"
       },
-      {
-        "@type": "Organization",
-        "@id": "{{ package.base }}/#organization",
-        "name": "Manifest Interactive",
-        "url": "{{ package.base }}",
-        "sameAs": [
-          "https://twitter.com/manifestllc",
-          "https://www.linkedin.com/company/manifestinteractive/",
-          "https://github.com/manifestinteractive"
-        ],
-        "logo": {
-          "@type": "ImageObject",
-          "@id": "https://www.momentumww.com/#logo",
-          "inLanguage": "en-US",
-          "url": "https://www.momentumww.com/wp-content/uploads/2020/08/cropped-Momentum-M-Branding-centered.png",
-          "contentUrl": "https://www.momentumww.com/wp-content/uploads/2020/08/cropped-Momentum-M-Branding-centered.png",
-          "width": 512,
-          "height": 512,
-          "caption": "Momentum Worldwide"
-        },
-        "image": {
-          "@id": "https://www.momentumww.com/#logo"
-        }
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ package.base }}/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
       },
-      {
-        "@type": "LocalBusiness",
-        "parentOrganization": {
-          "name": "Manifest Interactive"
-        },
-        "name": "Manifest Interactive",
-        "url": "{{ package.base }}",
-        "image": "{{ package.base }}/assets/images/cards/rvw.jpg",
-        "logo": "{{ package.base }}/assets/images/logo.png",
-        "priceRange": "N/A",
-        "description": "Manifest Interactive is a Web Development Agency that has been building custom web applications for over twenty years.",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "2046 13th St, Boulder, CO 80302, USA",
-          "addressLocality": "Boulder",
-          "addressRegion": "CO 80302",
-          "telephone": "Visit our Website"
-        },
-        "hasMap": "https://www.google.com/maps/place/2046+13th+St,+Boulder,+CO+80302/@40.0189511,-105.2808468,17z/data=!3m1!4b1!4m5!3m4!1s0x876bec27cdc8cdc7:0x900ca6ba2b93ac34!8m2!3d40.0189511!4d-105.2786528"
-      },
-      {
-        "@type": "Service",
-        "serviceType": "Salesforce Commerce Cloud",
-        "provider": {
-          "@type": "Corporation",
-          "name": "Manifest Interactive"
-        },
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "3rd Party Integrations",
-          "itemListElement": [{
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "A/B Testing: SFCC A/B Testing, Monetate & Optimizely"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "CMS: SalesForce ProCloud"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Customer Service Chat: Needle & ZenDesk"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Email Marketing: Salesforce Marketing Cloud, Emarsys, Bronto, Marketo & Responsys"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Enterprise Resource Planning: Logon, Oracle, Net Suite & SAP"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Fraud: Adyen Revenue Protect, Cybersource Advanced Fraud Screen, Cybersource Decision Manager, Forter, Kount & Riskified"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Image Management: Adobe Dynamic Media (Scene 7) & SFCC Dynamic Imaging Service"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Lookbook: Zmags"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Order Management System: Deck Commerce, Oracle CW Serenade & Order Dynamics"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Payment Providers: Alliance Data Systems, Amazon Pay, ApplePay, Chase, Cybersource, Klarna, Panda Pay, PayPal, SVS, Clutch & Vantiv"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "PIM: Salsify"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Pixel Tracking: Commission Junction"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Product Recommendations: Certona, SFCC Einstein Predictive & Intelligence RichRelevance"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Ratings & Reviews: BazaarVoice, Power Reviews & Yotpo"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Shipping: Shop Runner & Narvar"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Social Integration: Turnto, Addthis, Facebook, Instagram, LinkedIn & Twitter"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Social Selling: Olapic & Pixlee"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Store Locator: Brandify & Where to Get It"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Tag Managers: Google Tag Manager & Tealium"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Tax: Avatax & Vertex"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Translations: Translations.com"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "SFRA: Salesforce Reference Architectur"
-              }
-            }
-          ]
-        }
-      },
-      {
-        "@type": "Person",
-        "@id": "{{ package.base }}/#author",
-        "url": "{{ package.base }}/",
-        "name": "Manifest Interactive",
-        "image": {
-          "@type": "ImageObject",
-          "@id": "https://www.globallogic.com/services/experience-design/#authorImage",
-          "url": "https://secure.gravatar.com/avatar/8e439b99af055fb85fb73adfe7d83438?s=96&d=mm&r=g",
-          "width": "96",
-          "height": "96",
-          "caption": "Manifest Interactive"
-        }
-      },
-      {
-        "@type": "WebPage",
-        "@id": "{{ package.base }}{{ canonical }}#webpage",
-        "url": "{{ package.base }}{{ canonical }}",
-        "name": "User Experience Design - Customer Experience Design & Development | GlobalLogic",
-        "description": "{{ description }}",
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Organization",
+      "@id": "{{ package.base }}/#organization",
+      "name": "Manifest Interactive",
+      "url": "{{ package.base }}",
+      "sameAs": [
+        "https://twitter.com/manifestllc",
+        "https://www.linkedin.com/company/manifestinteractive/",
+        "https://github.com/manifestinteractive"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "{{ package.base }}/#logo",
         "inLanguage": "en-US",
-        "isPartOf": {
-          "@id": "{{ package.base }}/#website"
-        },
-        "breadcrumb": {
-          "@id": "{{ package.base }}{{ canonical }}#breadcrumblist"
-        },
-        "author": "{{ package.base }}/#author",
-        "creator": "{{ package.base }}/#author",
-        "image": {
-          "@type": "ImageObject",
-          "@id": "{{ package.base }}/#mainImage",
-          "url": "{{ card_image }}",
-          "width": "640",
-          "height": "320"
-        },
-        "primaryImageOfPage": {
-          "@id": "{{ package.base }}/#mainImage"
-        },
-        "datePublished": "2016-05-04T17:52:02+00:00",
-        "dateModified": "2021-08-06T10:11:13+00:00"
+        "url": "{{ package.base }}/assets/images/icon-512x512.png",
+        "contentUrl": "{{ package.base }}/assets/images/icon-512x512.png",
+        "width": 512,
+        "height": 512,
+        "caption": "Manifest Interactive"
+      },
+      "image": {
+        "@id": "{{ package.base }}/#logo"
       }
-    ]
-  }
-
+    },
+    {
+      "@type": "LocalBusiness",
+      "parentOrganization": {
+        "name": "Manifest Interactive"
+      },
+      "name": "Manifest Interactive",
+      "url": "{{ package.base }}",
+      "image": "{{ package.base }}/assets/images/card.png",
+      "logo": "{{ package.base }}/assets/images/icon-512x512.png",
+      "priceRange": "N/A",
+      "description": "Manifest Interactive is a Web Development Agency that has been building custom web applications for over twenty years.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "200 2nd Avenue South St. Petersburg, FL 33701 USA",
+        "addressLocality": "St. Petersburg",
+        "addressRegion": "FL 33701",
+        "telephone": "Visit our Website"
+      },
+      "hasMap": "https://www.google.com/maps/place/200+2nd+Ave+S,+St.+Petersburg,+FL+33701/@27.7691621,-82.6379562,17z/data=!3m1!4b1!4m5!3m4!1s0x88c2e19b65c2fbe1:0xf890c3605110bf39!8m2!3d27.7691621!4d-82.6357675"
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Web Development",
+      "provider": {
+        "@type": "Corporation",
+        "name": "Manifest Interactive"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Web Application Development",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Web Applications",
+              "description": "We make custom web applications, enterprise applications, SaaS solutions, e-commerce, CMS & cloud-based solutions."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Mobile Applications",
+              "description": "We've got over a decade of experience designing & developing custom native, cross-platform hybrid mobile apps."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Desktop Applications",
+              "description": "We create custom desktop applications for various industries across Windows, macOS, and Linux platforms."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Consulting",
+              "description": "Have your own team and need some guidance from seasoned professionals? We'd be happy to help in any way we can."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "{{ package.base }}{{ canonical }}#webpage",
+      "url": "{{ package.base }}{{ canonical }}",
+      "name": "{{ title }}",
+      "description": "{{ description }}",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@id": "{{ package.base }}/#website"
+      },
+      "breadcrumb": {
+        "@id": "{{ package.base }}{{ canonical }}#breadcrumblist"
+      },
+      "author": "{{ package.base }}/#author",
+      "creator": "{{ package.base }}/#author",
+      "image": {
+        "@type": "ImageObject",
+        "@id": "{{ package.base }}/#mainImage",
+        "url": "{{ card_image }}",
+        "width": "640",
+        "height": "320"
+      },
+      "primaryImageOfPage": {
+        "@id": "{{ package.base }}/#mainImage"
+      },
+      "datePublished": "2021-09-12T05:13:53.283Z",
+      "dateModified": "{{ package.publishedDate }}"
+    }
+  ]
+}
 </script>

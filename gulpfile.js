@@ -141,6 +141,7 @@ gulp.task('compile-scss', (done) => {
 gulp.task('copy', (done) => {
   gulp.src([
     'src/html/.htaccess',
+    'src/html/favicon.ico',
     'src/html/manifest.json',
     'src/html/*.txt'
   ]).pipe(gulp.dest('dist/'))
