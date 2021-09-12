@@ -2,13 +2,13 @@
   const MI = {
     devFlags: {
       debug: (MI_ENV !== 'production'),
+      sendContact: (MI_ENV !== 'development'),
       disableAnalytics: (MI_ENV === 'development')
     },
     interval: null,
     loaded: false,
     moveResetTimeout: false,
     timeout: null,
-    typed: 0,
 
     /**
      * Bind Events to DOM Elements
@@ -170,56 +170,96 @@
         $message.focus()
       }
 
-      // Check for Copy Paste / Bots
-      const message = $message.val()
-      const length = bytes(message)
-
-      if (valid && (MI.typed === 0 || MI.typed > 255 || MI.typed < length)) {
-        errorMessage = 'SPAM? Automation Detected.'
-        valid = false
-      }
-
       // Check for Valid Form
       if (valid) {
-        $.ajax({
-          type: method,
-          url: action,
-          data: $form.serialize(),
-          cache: false,
-          dataType: 'json',
-          contentType: 'application/json; charset=utf-8',
-          error: function (err) {
-            if (err.status === 404) {
-              $error.html('<span class="ion-android-warning"></span>&nbsp; Service is not available at the moment. Please check your internet connection or try again later.')
-            } else {
-              $error.html('<span class="ion-android-warning"></span>&nbsp; Oops. Looks like something went wrong. Please try again later.')
-            }
+        // Don't actually submit the form if we are testing
+        if (!MI.devFlags.sendContact) {
+          $form.trigger('reset')
+          $('.contact-success').html('<span class="ion-checkmark"></span>&nbsp; Form Test Completed ( Not Actually Sent )').show()
+          $('.hide-on-success').hide()
 
-            $error.show()
+          return false
+        }
 
-            MI.trackEvent('Error', 'Contact Us', JSON.stringify(err))
-          },
-          success: function (data) {
-            if (data.result !== 'success') {
-              $error.html('<span class="ion-android-warning"></span>&nbsp; ' + data.msg)
-              $error.show()
-              $('.hide-on-success').hide()
-
-              MI.trackEvent('Error', 'Contact Us', data.msg)
-
-              if (data.msg.indexOf('is already subscribed') > -1) {
-                MI.trackEvent('Contact Us', 'MailChimp Notice', 'Contacted Us Email Already Subscribed')
+        function validateToken (token) {
+          $.ajax({
+            type: 'POST',
+            url: '/recaptcha/',
+            data: {
+              token: token,
+              env: MI_ENV
+            },
+            error: function (err) {
+              if (err.status === 404) {
+                $error.html('<span class="ion-android-warning"></span>&nbsp; Service is not available at the moment. Please check your internet connection or try again later.')
               } else {
-                MI.trackEvent('Contact Us', 'MailChimp Error', data.msg)
+                $error.html('<span class="ion-android-warning"></span>&nbsp; Oops. Looks like something went wrong. Please try again later.')
               }
-            } else {
-              $form.trigger('reset')
-              $('.contact-success').show()
-              $('.hide-on-success').hide()
 
-              MI.trackEvent('Contact Us', 'MailChimp Success', 'User Contacted Us')
+              $error.show()
+
+              MI.trackEvent('Error', 'ReCAPTCHA Failed', JSON.stringify(err))
+            },
+            success: function (data) {
+              if (!data.success) {
+                $error.html('<span class="ion-android-warning"></span>&nbsp; ' + data.message ? data.message : 'CAPTCHA Rejected')
+                $error.show()
+                MI.trackEvent('Error', 'ReCAPTCHA Error', data.message ? data.message : 'CAPTCHA Rejected')
+              } else {
+                processForm()
+              }
             }
-          }
+          })
+        }
+
+        // Send Data to MailChimp
+        function processForm () {
+          $.ajax({
+            type: method,
+            url: action,
+            data: $form.serialize(),
+            cache: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            error: function (err) {
+              if (err.status === 404) {
+                $error.html('<span class="ion-android-warning"></span>&nbsp; Service is not available at the moment. Please check your internet connection or try again later.')
+              } else {
+                $error.html('<span class="ion-android-warning"></span>&nbsp; Oops. Looks like something went wrong. Please try again later.')
+              }
+
+              $error.show()
+
+              MI.trackEvent('Error', 'Contact Us', JSON.stringify(err))
+            },
+            success: function (data) {
+              if (data.result !== 'success') {
+                $error.html('<span class="ion-android-warning"></span>&nbsp; ' + data.msg)
+                $error.show()
+
+                MI.trackEvent('Error', 'Contact Us', data.msg)
+
+                if (data.msg.indexOf('is already subscribed') > -1) {
+                  MI.trackEvent('Contact Us', 'MailChimp Notice', 'Contacted Us Email Already Subscribed')
+                } else {
+                  MI.trackEvent('Contact Us', 'MailChimp Error', data.msg)
+                }
+              } else {
+                $form.trigger('reset')
+                $('.contact-success').show()
+                $('.hide-on-success').hide()
+
+                MI.trackEvent('Contact Us', 'MailChimp Success', 'User Contacted Us')
+              }
+            }
+          })
+        }
+
+        // Request Token from reCaptcha
+        grecaptcha.ready(function () {
+          grecaptcha.execute(MI_CAPTCHA, { action: 'submit' }).then(function (token) {
+            validateToken(token)
+          })
         })
       } else {
         MI.trackEvent('Error', 'Contact Us Form', errorMessage)
@@ -358,7 +398,6 @@
      */
     setupGUI: function () {
       MI.bindEvents()
-      MI.standalone()
       MI.loaded = true
 
       // Add active class to menu
@@ -419,24 +458,6 @@
     },
 
     /**
-     * Check if website is launched from someone saving the site to their Home Screen
-     * if so, we want to prevent leaving the full screen experience unless clicking
-     * an external link.
-     */
-    standalone: function () {
-      // Support Standalone mode and keep local links within app
-      if (('standalone' in window.navigator) && window.navigator.standalone) {
-        $('a').on('click', function (e) {
-          const newLocation = $(this).attr('href')
-          if (newLocation !== undefined && newLocation.substr(0, 1) !== '#' && $(this).attr('target') !== '_blank' && $(this).attr('data-lightbox') === undefined) {
-            window.location = newLocation
-            e.preventDefault()
-          }
-        })
-      }
-    },
-
-    /**
      * Update Max Length Count
      * @param evt
      */
@@ -444,12 +465,6 @@
       const message = $(evt.target).val()
       const length = bytes(message)
       const max = 255
-
-      MI.typed += 1
-
-      if (length === 0) {
-        MI.typed = 0
-      }
 
       $('#text-limit').text(length + ' / ' + max)
     }

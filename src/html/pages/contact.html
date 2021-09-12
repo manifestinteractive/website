@@ -60,7 +60,7 @@ canonical: /contact
         </div>
 
         <div class="contact-success">
-          <span class="ion-checkmark"></span>&nbsp; Message Sent Successfully.
+          <span class="ion-checkmark"></span>&nbsp; Message Sent Successfully
         </div>
       </form>
     </div>
@@ -77,4 +77,14 @@ canonical: /contact
       </div>
     </div>
   </div>
+  <div class="col-12 recaptcha-notice margin-top-30">
+    <p>
+      This site is protected by reCAPTCHA and the Google
+      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener nofollow" data-track data-category="Nav" data-action="ReCAPTCHA" data-label="Privacy Policy">Privacy Policy</a> and
+      <a href="https://policies.google.com/terms" target="_blank" rel="noopener nofollow" data-track data-category="Nav" data-action="ReCAPTCHA" data-label="Terms of Service">Terms of Service</a> apply.
+    </p>
+  </div>
 </div>
+
+<script>MI_CAPTCHA = '{{ package.googleReCAPTCHA }}';</script>
+<script src="https://www.google.com/recaptcha/api.js?render={{ package.googleReCAPTCHA }}"></script>

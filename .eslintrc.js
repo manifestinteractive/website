@@ -15,10 +15,12 @@ module.exports = {
   },
   globals: {
     '$': true,
+    'grecaptcha': true,
+    'gtag': true,
     'jQuery': true,
+    'MI_CAPTCHA': true,
     'MI_ENV': true,
     'MI_READY': true,
-    'Overscroll': true,
-    'gtag': true
+    'Overscroll': true
   }
 }

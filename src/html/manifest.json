@@ -1,7 +1,9 @@
 {
   "app_name": "Manifest",
-  "background_color": "#ffffff",
+  "background_color": "#1B1E28",
+  "categories": ["business", "personalization", "productivity", "utilities"],
   "description": "Manifest Interactive is a Web Development Agency that has been building custom web applications for over twenty years.",
+  "display_override": ["window-control-overlay", "minimal-ui"],
   "display": "standalone",
   "icons": [
       {
@@ -25,8 +27,32 @@
           "type": "image/png"
       }
   ],
+  "lang": "en-US",
   "name": "Manifest Interactive",
   "short_name": "Manifest",
-  "start_url": "./?utm_source=web_app_manifest",
+  "shortcuts": [
+    {
+      "name": "About Us",
+      "short_name": "About",
+      "description": "About Manifest Interactive",
+      "url": "/about",
+      "icons": [{ "src": "assets/images/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Contact Us",
+      "short_name": "Contact",
+      "description": "Contact Manifest Interactive",
+      "url": "/contact",
+      "icons": [{ "src": "assets/images/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Projects",
+      "short_name": "Projects",
+      "description": "Manifest Interactive Projects",
+      "url": "/projects",
+      "icons": [{ "src": "assets/images/icon-192x192.png", "sizes": "192x192" }]
+    }
+  ],
+  "start_url": "/",
   "theme_color": "#1B1E28"
 }

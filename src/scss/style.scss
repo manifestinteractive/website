@@ -254,6 +254,16 @@ blockquote {
   display: none;
 }
 
+.grecaptcha-badge {
+  visibility:hidden;
+}
+
+.recaptcha-notice p {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: unset;
+}
+
 #back-to-top {
   display: inline-block;
   background-color: var(--accent-black);
