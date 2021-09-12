@@ -7,6 +7,24 @@ card_image: /assets/images/card.png
 canonical: /search
 ---
 
+<div class="container">
+  <div class="row">
+    <!-- Header -->
+    <div class="col-sm-12 col-md-offset-2 col-md-8 margin-top-60">
+      <h1 class="title">Search Results</h1>
+      <p class="body-text">Let's try to find what you are looking for.</p>
+      <hr class="sep-line" role="presentation">
+    </div>
+
+    <!-- Search Results -->
+    <div class="col-sm-12 col-md-offset-2 col-md-8 no-padding-left no-padding-right">
+      <div class="col-sm-12">
+        <ul id="search-results" data-search="{{ package.googleAPI }}" data-cx="{{ package.googleSearchCX }}"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type="application/ld+json">
 {
   "@type": "BreadcrumbList",
@@ -32,21 +50,3 @@ canonical: /search
   ]
 }
 </script>
-
-<div class="container">
-  <div class="row">
-    <!-- Header -->
-    <div class="col-sm-12 col-md-offset-2 col-md-8 margin-top-60">
-      <h1 class="title">Search Results</h1>
-      <p class="body-text">Let's try to find what you are looking for.</p>
-      <hr class="sep-line" role="presentation">
-    </div>
-
-    <!-- Search Results -->
-    <div class="col-sm-12 col-md-offset-2 col-md-8 no-padding-left no-padding-right">
-      <div class="col-sm-12">
-        <ul id="search-results" data-search="{{ package.googleAPI }}" data-cx="{{ package.googleSearchCX }}"></ul>
-      </div>
-    </div>
-  </div>
-</div>

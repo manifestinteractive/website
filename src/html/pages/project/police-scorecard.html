@@ -7,42 +7,6 @@ card_image: /assets/images/projects/police-scorecard/card.png
 canonical: /project/police-scorecard
 ---
 
-<script type="application/ld+json">
-{
-  "@type": "BreadcrumbList",
-  "@id": "{{ package.base }}{{ canonical }}/#breadcrumb",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "item": {
-        "@type": "WebPage",
-        "@id": "{{ package.base }}/",
-        "url": "{{ package.base }}",
-        "name": "Home"
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "item": {
-        "@type": "WebPage",
-        "@id": "{{ package.base }}/projects/",
-        "url": "{{ package.base }}/projects",
-        "name": "Projects"
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "item": {
-        "@id": "{{ package.base }}{{ canonical }}/#webpage"
-      }
-    }
-  ]
-}
-</script>
-
 <div class="project-single margin-top-100 margin-top-50-xs">
   <div class="container">
     <div class="row">
@@ -171,3 +135,39 @@ canonical: /project/police-scorecard
     </div>
   </div>
 </div>
+
+<script type="application/ld+json">
+{
+  "@type": "BreadcrumbList",
+  "@id": "{{ package.base }}{{ canonical }}/#breadcrumb",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "WebPage",
+        "@id": "{{ package.base }}/",
+        "url": "{{ package.base }}",
+        "name": "Home"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "WebPage",
+        "@id": "{{ package.base }}/projects/",
+        "url": "{{ package.base }}/projects",
+        "name": "Projects"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@id": "{{ package.base }}{{ canonical }}/#webpage"
+      }
+    }
+  ]
+}
+</script>
