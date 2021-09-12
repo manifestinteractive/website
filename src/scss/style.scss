@@ -14,8 +14,8 @@
   --accent-green: #7FCAB1;
   --accent-red: #E03131;
   --accent-red-light: #ff8484;
-  --border: #E9E9E9;
-  --border-focus: #C1C1C1;
+  --border: #C1C1C1;
+  --border-focus: #999999;
 }
 
 html, body {
@@ -125,7 +125,6 @@ h2 {
     font-size: 30px;
     font-weight: 200;
     line-height: 30px;
-    opacity: 0.8;
   }
 }
 
@@ -150,7 +149,7 @@ p {
   font-weight: 300;
   line-height: 24px;
   letter-spacing: 1px;
-  color: var(--color-gray);
+  color: var(--color-black);
   margin-bottom: 15px;
 
   &.body-text {
@@ -162,7 +161,7 @@ p {
 li {
   font-size: 15px;
   font-weight: 300;
-  color: var(--color-gray);
+  color: var(--color-black);
   margin-bottom: 10px;
   letter-spacing: 1px;
 }
@@ -304,6 +303,67 @@ blockquote {
   }
 }
 
+#unsupported-browser {
+  display: none;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background: #E03131;
+  overflow: hidden;
+  z-index: 9999;
+
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -40px 0px 0px -200px;
+    display: block;
+    width: 430px;
+    height: 100px;
+    color: #fff;
+
+    span {
+      font-size: 100px;
+      font-weight: bold;
+      line-height: 94px;
+      display: block;
+      width: 36px;
+      float: left;
+      margin-right: 0;
+      text-shadow: -2px -2px #333;
+    }
+
+    .heading {
+      font-size: 34px;
+      font-weight: bold;
+      line-height: 40px;
+      margin: 0px;
+      text-shadow: -2px -2px #611b22;
+      text-transform: lowercase;
+    }
+
+    p {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 22px;
+      letter-spacing: 0px;
+      margin: 0px;
+      padding: 0px;
+      margin-top: 6px;
+      color: #FFF;
+
+      a {
+        font-size: 14px;
+        font-weight: bold;
+        color: #FFF;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
 #header {
   &.standard {
     padding-top: 50px;
@@ -424,7 +484,7 @@ blockquote {
               display: block;
               transition: color .3s, border .3s;
               text-transform: uppercase;
-              color: var(--color-gray);
+              color: var(--color-black);
               line-height: 70px;
               border-bottom: 2px inset transparent;
               font-weight: 400;
@@ -522,7 +582,7 @@ blockquote {
       line-height: 34px;
       letter-spacing: 0;
       font-weight: 300;
-      color: var(--color-gray);
+      color: var(--color-black);
       display: inline-block;
     }
 
@@ -708,7 +768,7 @@ h2.title + div.cta > p, h2.title > div > p > a {
   li a {
     font-size: 14px;
     font-weight: 300;
-    color: var(--color-gray);
+    color: var(--color-black);
 
     span {
       font-size: 16px;
@@ -885,20 +945,31 @@ textarea {
   div, address {
     font-size: 14px;
     font-weight: 300;
-    color: var(--color-gray);
+    color: var(--color-black);
     letter-spacing: 1px;
 
     span {
       display: block;
       font-size: 16px;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--accent-black);
       letter-spacing: 1px;
+      margin-bottom: 4px;
     }
   }
 
   div {
-    margin-bottom: 10px;
+    margin-bottom: 14px;
+  }
+}
+
+.cbp-caption-active .cbp-caption,
+.cbp-caption-active .cbp-caption-defaultWrap {
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  transition: border 0.5s;
+
+  &:hover, &:focus {
+    border: 2px solid rgba(0, 0, 0, 0);
   }
 }
 
@@ -1117,7 +1188,7 @@ textarea {
             border-top: 1px solid rgba(132, 132, 132, 0.2);
 
             & > a {
-              color: var(--color-gray);
+              color: var(--color-black);
               padding-left: 20px;
               position: relative;
               line-height: 55px;
@@ -1430,6 +1501,24 @@ html.gdpr-required {
     color: var(--accent-black);
   }
 
+  .form-control {
+    border-color: transparent;
+
+    &:focus, &:hover {
+      border-color: transparent;
+    }
+  }
+
+  .cbp-caption-active .cbp-caption,
+  .cbp-caption-active .cbp-caption-defaultWrap {
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    transition: border 0.5s;
+
+    &:hover, &:focus {
+      border: 2px solid rgba(255, 255, 255, 0);
+    }
+  }
+
   .skip-to-content-link {
     background: var(--color-white);
     color: var(--accent-black);
@@ -1486,7 +1575,7 @@ html.gdpr-required {
   }
 
   p, .cta p {
-    color: var(--color-light-gray);
+    color: var(--color-white);
 
     a {
       color: var(--color-white);
@@ -1550,7 +1639,7 @@ html.gdpr-required {
 
   #header.standard .header-wrapper #main-menu ul li a,
   .client-list li a {
-    color: var(--color-light-gray);
+    color: var(--color-white);
 
     &.active, &:focus, &:hover {
       color: var(--color-white);
@@ -1578,8 +1667,12 @@ html.gdpr-required {
     border-top-color: #323546;
   }
 
-  .contact-info div span, .contact-info address span {
+  .contact-info div, .contact-info address {
     color: var(--color-white);
+
+    span {
+      color: var(--color-white);
+    }
   }
 
   .post-list .post .post-content .post-date {
@@ -1651,6 +1744,9 @@ html.gdpr-required {
 
 /* Support Pretty Printed Pages */
 @media print {
+  .no-print {
+    visibility: hidden;
+  }
   .avoid-break {
     break-inside: avoid;
   }

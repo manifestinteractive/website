@@ -133,6 +133,8 @@ https://manifestintractive.com/contact
       <!-- Page Wrapper Ends -->
     </main>
 
+    {{> unsupported-browser}}
+
     <button id="back-to-top" data-track data-category="Nav" data-action="Footer" data-label="Back to Top">
       <span class="sr-only">Back to Top</span>
     </button>
@@ -141,15 +143,16 @@ https://manifestintractive.com/contact
     <script>var MI_ENV = '{{ package.env }}';</script>
     <script defer src="{{ package.assetPath }}js/plugins.{{package.version}}.min.js{{ package.cacheBreak }}"></script>
     <script defer src="{{ package.assetPath }}js/app.{{package.version}}.min.js{{ package.cacheBreak }}"></script>
-
     <script>
-    // Load Service Worker for PWA
-      if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js').then(function(reg) {
-            console.log('Successfully registered service worker', reg);
-        }).catch(function(err) {
-            console.warn('Error whilst registering service worker', err);
-        });
+      // Check for Unsupported Browsers
+      if (window.document.documentMode) {
+        document.getElementById('unsupported-browser').style.display = 'block';
+        document.getElementById('loading-wrapper').style.display = 'none';
+        document.getElementById('page-wrapper').style.display = 'none';
+        document.getElementById('back-to-top').style.display = 'none';
+        // Redirect to Unsupported Browser Page
+      } else if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js')
       }
     </script>
   </body>
