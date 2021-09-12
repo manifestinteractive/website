@@ -42,8 +42,7 @@ gulp.task('compile-css', (done) => {
   gulp.src([
     `${assetsPath}/css/bootstrap.css`,
     `${assetsPath}/css/cubeportfolio.css`,
-    `${assetsPath}/css/ionicons.css`,
-    `${assetsPath}/css/owl.carousel.css`
+    `${assetsPath}/css/ionicons.css`
   ])
   .pipe(csso())
   .pipe(concat(`plugins.${version}.min.css`))
@@ -78,12 +77,9 @@ gulp.task('compile-html:reset', (done) => {
 // @TODO: Clean up unused code once we finish the site
 gulp.task('compile-js', (done) => {
   gulp.src([
-    `${assetsPath}/js/jquery-1.12.4.min.js`,
-    `${assetsPath}/js/bootstrap.js`,
+    `${assetsPath}/js/jquery.min.js`,
     `${assetsPath}/js/cubeportfolio.min.js`,
-    `${assetsPath}/js/owl.carousel.min.js`,
-    `${assetsPath}/js/overscroll.min.js`,
-    `${assetsPath}/js/superfish.js`,
+    `${assetsPath}/js/overscroll.min.js`
   ])
   .pipe(uglify())
   .pipe(concat(`plugins.${version}.min.js`))
