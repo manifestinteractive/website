@@ -7,6 +7,22 @@ card_image: /assets/images/card.png
 canonical: /
 ---
 
+<script type="application/ld+json">
+{
+  "@type": "BreadcrumbList",
+  "@id": "{{ package.base }}{{ canonical }}/#breadcrumb",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "{{ package.base }}/#webpage"
+      }
+    }
+  ]
+}
+</script>
+
 <div class="container">
   <div class="row">
     <div class="col-sm-12">

@@ -7,6 +7,32 @@ card_image: /assets/images/card.png
 canonical: /projects
 ---
 
+<script type="application/ld+json">
+{
+  "@type": "BreadcrumbList",
+  "@id": "{{ package.base }}{{ canonical }}/#breadcrumb",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "WebPage",
+        "@id": "{{ package.base }}/",
+        "url": "{{ package.base }}",
+        "name": "Home"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@id": "{{ package.base }}{{ canonical }}/#webpage"
+      }
+    }
+  ]
+}
+</script>
+
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
