@@ -481,7 +481,7 @@
     }, 100)
 
     // Force Remove Loading animation if it's still up after five seconds
-    setTimeout(function(){
+    setTimeout(function () {
       clearInterval(MI.interval)
       $('body').removeClass('loading')
       $('.pageloader').hide()

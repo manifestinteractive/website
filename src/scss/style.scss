@@ -63,8 +63,8 @@ h1, h2, h3, h4, h5, h6 {
 
 input:active, button:active, select:active, textarea:active, a:active,
 input:focus, button:focus, select:focus, textarea:focus, a:focus {
-  outline: 2px solid #7AACFE !important; /* for non-webkit browsers */
-  outline: 5px auto -webkit-focus-ring-color !important;
+  outline: auto 2px Highlight !important; /* for non-webkit browsers */
+  outline: auto 5px -webkit-focus-ring-color !important;
   outline-offset: 4px;
 }
 
@@ -79,8 +79,8 @@ input, select, textarea {
 .has-error {
   input:active, button:active, select:active, textarea:active, a:active,
   input:focus, button:focus, select:focus, textarea:focus, a:focus {
-    outline: 2px solid var(--accent-red) !important; /* for non-webkit browsers */
-    outline: 5px auto var(--accent-red) !important;
+    outline: auto 2px var(--accent-red) !important; /* for non-webkit browsers */
+    outline: auto 5px var(--accent-red) !important;
     outline-offset: 4px;
   }
 
@@ -613,7 +613,7 @@ h2.title + div.cta > p, h2.title > div > p > a {
     border: 1px solid var(--accent-black);
     padding: 8px 16px;
     display: inline-block;
-    transition: all .3s ease;
+    transition: background-color .3s ease, color .3s ease;
     text-transform: uppercase;
 
     &:hover {
@@ -801,7 +801,7 @@ textarea {
     background: var(--accent-black);
     padding: 12px 25px;
     margin-top: 10px;
-    transition: .3s all;
+    transition: background-color .3s, color .3s;
     text-transform: uppercase;
     font-weight: bold;
 
@@ -1442,8 +1442,8 @@ html.gdpr-required {
   .has-error {
     input:active, button:active, select:active, textarea:active, a:active,
     input:focus, button:focus, select:focus, textarea:focus, a:focus {
-      outline: 2px solid var(--accent-red-light) !important; /* for non-webkit browsers */
-      outline: 5px auto var(--accent-red-light) !important;
+      outline: auto 2px var(--accent-red-light) !important; /* for non-webkit browsers */
+      outline: auto 5px var(--accent-red-light) !important;
       outline-offset: 4px;
     }
 
