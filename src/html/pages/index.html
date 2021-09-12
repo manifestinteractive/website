@@ -159,15 +159,20 @@ canonical: /
 
 <script type="application/ld+json">
 {
-  "@type": "BreadcrumbList",
-  "@id": "{{ package.base }}{{ canonical }}#breadcrumb",
-  "itemListElement": [
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@type": "ListItem",
-      "position": 1,
-      "item": {
-        "@id": "{{ package.base }}/#webpage"
-      }
+      "@type": "BreadcrumbList",
+      "@id": "{{ package.base }}{{ canonical }}#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "{{ package.base }}/#webpage"
+          }
+        }
+      ]
     }
   ]
 }
