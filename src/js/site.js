@@ -454,7 +454,7 @@
       $('body').removeClass('loading')
       $('.pageloader').hide()
 
-      clearTimeout(MI.interval)
+      clearInterval(MI.interval)
     },
 
     /**
@@ -479,6 +479,13 @@
         MI.init()
       }
     }, 100)
+
+    // Force Remove Loading animation if it's still up after five seconds
+    setTimeout(function(){
+      clearInterval(MI.interval)
+      $('body').removeClass('loading')
+      $('.pageloader').hide()
+    }, 5000)
   })
 
   /**
