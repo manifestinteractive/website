@@ -1,0 +1,23 @@
+name: Manifest Interactive - Pull Request
+on:
+  pull_request:
+    branches:
+      - main
+      - staging
+      - develop
+jobs:
+  build_and_test:
+    name: Build Application and Run Tests
+    runs-on: [self-hosted, linux, X64]
+    steps:
+      - name: Check out Repository
+        uses: actions/checkout@v2
+
+      - name: Install Node Dependencies
+        run: npm install --no-optional
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Clean Up Build Files
+        run: rm -fr /var/www/actions-runner/_work/schmalfeldt-projects/website/{*,.*} > /dev/null 2>&1 &
