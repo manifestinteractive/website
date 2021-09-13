@@ -19,10 +19,10 @@ This is the default error message if the `npm test` failed.  Directly above this
 
 ### `error  Parsing error: ...`
 
-This is a JavaScript error that was captured during `npm test`.  The entire error message will include the exact file, line number and column where the error occured.
+This is a JavaScript error that was captured during `npm test`.  The entire error message will include the exact file, line number and column where the error occurred.
 
 ```
-/Volumes/RedVan/website/src/js/site.js
+/path/to/projects/website/src/js/site.js
   5:18  error  Parsing error: Unexpected token ,
 ```
 
@@ -45,7 +45,7 @@ If you see this, the rendered HTML code in the `./dist` folder ended up having a
 Your full error message will likely look something like:
 
 ```
-[lint-html] ./dist/careers.html [314:18] (E005) the `class` attribute is not double quoted
+[lint-html] ./dist/contact.html [314:18] (E005) the `class` attribute is not double quoted
 ```
 
 The error is broken down into:
@@ -62,16 +62,16 @@ If you see this error, this means that there was an issue with one of the panani
 
 ```
 /Volumes/RedVan/website/node_modules/panini/lib/render.js:80
-    throw new Error('Panini: rendering error occured.\n' + e);
+    throw new Error('Panini: rendering error occurred.\n' + e);
     ^
-Error: Panini: rendering error occured.
+Error: Panini: rendering error occurred.
 Error: Parse error on line 253:
 ...ion>{{> footer}}
 -------------------^
 Expecting 'OPEN_ENDBLOCK', got 'EOF'
 ```
 
-This one is a bit tricky, as the error message for where the error occurred is not going to be 100% accurate.  Most likely you saw this error immediatley after modifying and saving an HTML file, and a template string inside that file is what is broken.
+This one is a bit tricky, as the error message for where the error occurred is not going to be 100% accurate.  Most likely you saw this error immediately after modifying and saving an HTML file, and a template string inside that file is what is broken.
 
 If you cannot find it there, likely because you saved multiple files at the same time, you can look at your `git diff` and see what you've changed that is inside the template brackets `{{ }}`.
 
@@ -86,16 +86,16 @@ HTML Errors
 You might be seeing something that looks like this injected at the top of the page:
 
 ```
----layout: default title: Manifest Interactive description: Manifest Interactive partners with e-commerce retailers who want to get things done. All on-shore. All Salesforce Commerce Cloud. ---
+---layout: default title: Manifest Interactive description: Manifest Interactive is a Web Development Agency that has been building custom web applications for over twenty years. ---
 ```
 
-If so, that means you likely used some fancy code formatting tool that messed up the panini template variables that are set on top of some HTML pages.  To fix this, you can check the HTML files that are used on the page you are seeing this error on.  At the top of one of them, you will see that text you saw in your HTML page.  To correct the issue, make sure the template varables in the HTML are written like this:
+If so, that means you likely used some fancy code formatting tool that messed up the panini template variables that are set on top of some HTML pages.  To fix this, you can check the HTML files that are used on the page you are seeing this error on.  At the top of one of them, you will see that text you saw in your HTML page.  To correct the issue, make sure the template variables in the HTML are written like this:
 
 ```
 ---
 layout: default
 title: Manifest Interactive
-description: Manifest Interactive partners with e-commerce retailers who want to get things done. All on-shore. All Salesforce Commerce Cloud.
+description: Manifest Interactive is a Web Development Agency that has been building custom web applications for over twenty years.
 ---
 ```
 

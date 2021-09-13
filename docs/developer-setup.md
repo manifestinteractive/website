@@ -10,8 +10,8 @@ Developer Setup
 Requirements:
 ---
 
-* Node v8.12
-* NPM v6.4
+* Node v14.17+
+* NPM v6.14+
 
 Node Version Manager (Optional):
 ---
@@ -94,7 +94,6 @@ This will kick off a server and automatically open a browser for you at [http://
 
 All code changes you make will trigger a rebuild of the project and refresh the website for you.
 
-
 Code Changes
 ---
 
@@ -109,7 +108,7 @@ The awesome SVGs used in this project came from [Scale](https://2.flexiple.com/s
 #### Accent Colors:
 
 COLOR   | HEX                                                                       | WEBSITE CSS
--------:|:-------------------------------------------------------------------------:|:---------------------
+:------:|:-------------------------------------------------------------------------:|:---------------------
 COLOR 1 | ![#1B1E28](https://via.placeholder.com/15/1B1E28/000000?text=+) `#1B1E28` | `var(--accent-black)`
 COLOR 2 | ![#566AAE](https://via.placeholder.com/15/566AAE/000000?text=+) `#566AAE` | `var(--accent-blue)`
 COLOR 3 | ![#7FCAB1](https://via.placeholder.com/15/7FCAB1/000000?text=+) `#7FCAB1` | `var(--accent-green)`

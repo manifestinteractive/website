@@ -32,7 +32,7 @@ Make sure to follow the [CONTRIBUTING](../.github/CONTRIBUTING.md) guidelines se
 Continuous Integration
 ---
 
-We are using CircleCI to automate deployment of website updates.  In order to trigger a website update, you will need to submit, review & approve a merge of the latest `staging` branch into the `master` branch, and then create a new tagged branch off of master.
+We are using CircleCI to automate deployment of website updates.  In order to trigger a website update, you will need to submit, review & approve a merge of the latest `staging` branch into the `main` branch, and then create a new tagged branch off of main.
 
 We are using the standard version method of `major.minor.patch` and the release versions should reflect the appropriate changes.
 
@@ -42,13 +42,13 @@ We are using the standard version method of `major.minor.patch` and the release 
 
 Most of the time we are likely going to be doing `patch` releases, so here is how you can use NPM to do this:
 
-**PLEASE NOTE:** This option will only work for selected project administrators who have write access to the `master` branch. These commands will checkout the `master` branch and stash all your local changes. Then it will pull down any changes you might not have locally, create a new version and create a tag release. Then it will push the newly created tagged branch up to our central repository, which will trigger CircleCI to test the release branch, and perform an automated website update ... so, you know, **do this carefully** ;)
+**PLEASE NOTE:** This option will only work for selected project administrators who have write access to the `main` branch. These commands will checkout the `main` branch and stash all your local changes. Then it will pull down any changes you might not have locally, create a new version and create a tag release. Then it will push the newly created tagged branch up to our central repository, which will trigger CircleCI to test the release branch, and perform an automated website update ... so, you know, **do this carefully** ;)
 
 ```bash
-git checkout --force master
+git checkout --force main
 git stash
 git pull
-npm version patch -m "Red Van Website Release v%s"
+npm version patch -m "Manifest Interactive Website Release v%s"
 ```
 
 CDN Deployment

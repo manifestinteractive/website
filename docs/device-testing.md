@@ -9,8 +9,7 @@ Device Testing
 
 ![Web Design](img/web-design.png "Web Design")
 
-With the website up and running on your local developer machine, you can easily preview it on any external device on
-the **Same Local WiFi Network** using Your Local IP Address.
+With the website up and running on your local developer machine, you can easily preview it on any external device on the **Same Local WiFi Network** using Your Local IP Address.
 
 Let's say your local IP address is **`192.168.1.100`**, you would just need to point your external device to **`http://192.168.1.100:8081/`**
 

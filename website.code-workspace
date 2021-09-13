@@ -1,0 +1,53 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+    "window.title": "Manifest Interactive Website${separator}${activeEditorShort}",
+		"cSpell.words": [
+      "animationtype",
+      "breadcrumblist",
+      "browserslist",
+      "captionanimation",
+      "changefreq",
+      "checkmark",
+      "cubeportfolio",
+      "foss",
+      "gaphorizontal",
+      "gapi",
+      "gapvertical",
+      "googlebot",
+      "grecaptcha",
+      "gtag",
+      "gulpfile",
+      "htmllint",
+      "ionicons",
+      "itemscope",
+      "itemtype",
+      "jsonld",
+      "lastmod",
+      "layoutmode",
+      "loadmoreaction",
+      "manifestinteractive",
+      "manifestllc",
+      "mrmidi",
+      "noodp",
+      "noydir",
+      "overscroll",
+      "pageloader",
+      "panani",
+      "panini",
+      "postprocessor",
+      "postversion",
+      "preversion",
+      "recaptcha",
+      "rexi",
+      "rexy",
+      "scriptshelp",
+      "sitekey",
+      "syngenta"
+    ]
+	}
+}

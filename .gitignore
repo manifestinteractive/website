@@ -6,3 +6,5 @@ dist
 aws.json
 *.code-workspace
 src/assets/pdf/*.docx
+!.nvmrc
+!website.code-workspace
