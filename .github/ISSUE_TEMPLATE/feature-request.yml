@@ -1,6 +1,5 @@
 name: Feature Request
 description: This is a new Feature Request for this project
-title: '[FEATURE] <title>'
 labels: [Feature Request]
 assignees:
   - manifestinteractive

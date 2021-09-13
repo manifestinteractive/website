@@ -1,6 +1,5 @@
 name: Bug Report
 description: I would like to Report a Bug
-title: '[BUG] <title>'
 labels: [Bug Report]
 assignees:
   - manifestinteractive

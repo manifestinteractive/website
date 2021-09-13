@@ -1,6 +1,5 @@
 name: Question
 description: I have a Question about this project
-title: '[QUESTION] <title>'
 labels: [Question]
 assignees:
   - manifestinteractive
