@@ -452,7 +452,6 @@
 
       // Hide Page Loader after setting up everything
       $('body').removeClass('loading')
-      $('.pageloader').hide()
 
       clearInterval(MI.interval)
     },
@@ -478,7 +477,7 @@
       if (MI_READY && !MI.loaded) {
         MI.init()
       }
-    }, 100)
+    }, 10)
   })
 
   /**
