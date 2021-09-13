@@ -83,18 +83,9 @@ https://manifestintractive.com/contact
     @media (prefers-color-scheme: dark) {html,body{background-color: #1b1e28;}.pageloader{background-color: #1b1e28;}}
     </style>
 
-    <!-- ASYNC load CSS and Init when complete -->
-    <script>var MI_READY=false;var CSS_LOADED=0;function checkReady(){CSS_LOADED++;if(CSS_LOADED===2){MI_READY=true;if(typeof MI !== 'undefined'){MI.init();}}};!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e,n=loadCSS.relpreload={};if(!(e="preload",function(t){return!(!t||!t.supports||!e)&&t.supports(e)})(document.createElement("link").relList)){if(n.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),n.bindMediaToggle=function(t){var e=t.media||"all";function n(){t.media=e}t.addEventListener?t.addEventListener("load",n):t.attachEvent&&t.attachEvent("onload",n),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(n,3e3)},n.poly=function(){if(!n.support())for(var e=t.document.getElementsByTagName("link"),a=0;a<e.length;a++){var o=e[a];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),n.bindMediaToggle(o))}},!n.support()){n.poly();var a=t.setInterval(n.poly,500);t.addEventListener?t.addEventListener("load",function(){n.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){n.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}}("undefined"!=typeof global?global:this);</script>
-
-    <!-- ASYNC Preload CSS -->
-    <link rel="preload" href="{{ package.assetPath }}css/plugins.{{ package.version }}.min.css{{ package.cacheBreak }}" as="style" onload="this.onload=null;this.rel='stylesheet';checkReady();">
-    <link rel="preload" href="{{ package.assetPath }}css/app.{{ package.version }}.min.css{{ package.cacheBreak }}" as="style" onload="this.onload=null;this.rel='stylesheet';checkReady();">
-
-    <!-- Fallback to load CSS if no scripts -->
-    <noscript>
-      <link rel="stylesheet" href="{{ package.assetPath }}css/plugins.{{ package.version }}.min.css{{ package.cacheBreak }}">
-      <link rel="stylesheet" href="{{ package.assetPath }}css/app.{{ package.version }}.min.css{{ package.cacheBreak }}">
-    </noscript>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ package.assetPath }}css/plugins.{{ package.version }}.min.css{{ package.cacheBreak }}">
+    <link rel="stylesheet" href="{{ package.assetPath }}css/app.{{ package.version }}.min.css{{ package.cacheBreak }}">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ package.analytics }}"></script>

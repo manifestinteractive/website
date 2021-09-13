@@ -472,13 +472,7 @@
   /**
    * Initialize on Page Load
    */
-  window.addEventListener('load', function (e) {
-    MI.interval = setInterval(function () {
-      if (MI_READY && !MI.loaded) {
-        MI.init()
-      }
-    }, 10)
-  })
+  window.addEventListener('load', MI.init)
 
   /**
    * Fix iOS Back Button Issue for Loading Screen
