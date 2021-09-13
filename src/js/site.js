@@ -48,6 +48,13 @@
 
       const overscroll = new Overscroll()
       overscroll.init('/assets/images/rexi.png')
+
+      setInterval(function(){
+        var random = Math.floor(Math.random() * 2)
+        if (random === 1) {
+          MI.rexyBlink()
+        }
+      }, 10000)
     },
 
     /**
@@ -447,6 +454,13 @@
           lightboxGallery: true,
           lightboxTitleSrc: 'data-title',
           lightboxCounter: '<div class="cbp-popup-lightbox-counter">{{current}} of {{total}}</div>'
+        })
+
+        $(window).resize(function () {
+          clearTimeout($(this).data('resize-timer'))
+          $(this).data('resize-timer', setTimeout(function () {
+            $portfolioGrid.cubeportfolio('layout')
+          }, 100))
         })
       }
 
