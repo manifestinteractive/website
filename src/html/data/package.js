@@ -9,7 +9,7 @@ module.exports = {
   googleAPI: isProd ? 'AIzaSyAZbGCa28EOzyhBzK3mH28MU5w3PLOVc9Q' : 'AIzaSyDH_Vnp0IaAmFuCx0orTjIJsxkAlM03B6A',
   googleReCAPTCHA: isProd ? '6LdbkF4cAAAAAO1TcSMpvfi4VNGHU9B7jdy5FH65' : '6LeFm14cAAAAAJvd179ZxMEFfuYFTqaH8lSZ0Kj5',
   googleSearchCX: '278575f6a5e288960',
-  assetPath: isProd ? 'https://d14qmhpz0yq7x9.cloudfront.net/' : '/assets/',
+  assetPath: '/assets/',
   cacheBreak: isProd ? '' : `?ac${new Date().getTime()}`,
   currentYear: date.getFullYear(),
   currentDate: date.toISOString().slice(0, 10),
