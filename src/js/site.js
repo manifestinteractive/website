@@ -49,8 +49,8 @@
       const overscroll = new Overscroll()
       overscroll.init('/assets/images/rexi.png')
 
-      setInterval(function(){
-        var random = Math.floor(Math.random() * 2)
+      setInterval(function () {
+        const random = Math.floor(Math.random() * 2)
         if (random === 1) {
           MI.rexyBlink()
         }
