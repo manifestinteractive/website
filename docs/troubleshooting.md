@@ -61,7 +61,7 @@ You can lookup the specific [Error Code](https://github.com/htmllint/htmllint/wi
 If you see this error, this means that there was an issue with one of the panani template variables.  For example, when including the menu in a template, you would use `{{> menu}}`, but if for whatever reason you added some invalid markup to this template section, e.g. `{{#> menu}}` you will see this error.  The total error message may look something like this:
 
 ```
-/Volumes/RedVan/website/node_modules/panini/lib/render.js:80
+/path/to/projects/website/node_modules/panini/lib/render.js:80
     throw new Error('Panini: rendering error occurred.\n' + e);
     ^
 Error: Panini: rendering error occurred.
