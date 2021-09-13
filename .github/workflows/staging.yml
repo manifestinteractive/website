@@ -7,7 +7,6 @@ jobs:
   deploy:
     name: Deploy to Staging
     runs-on: [self-hosted, Linux, X64]
-    needs: [build_and_test]
     steps:
       - name: Trigger Deployment
         run: /usr/local/bin/deploy-staging
