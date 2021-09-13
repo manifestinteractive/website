@@ -1,5 +1,6 @@
 name: Requested Change
 description: This is a Requested Change to the project
+title: '[CHANGE] <title>'
 labels: [Requested Change]
 assignees:
   - manifestinteractive
