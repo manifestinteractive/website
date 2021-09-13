@@ -22,6 +22,7 @@ html, body {
   height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scrollbar-width: thin;
 }
 
 body {
@@ -1498,6 +1499,15 @@ html.gdpr-required {
   ::selection {
     background: var(--color-white);
     color: var(--accent-black);
+  }
+
+  body.custom-scroll::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.25);
+    border: 3px solid #1B1E28;
+  }
+
+  body.is-scrolling.custom-scroll::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 1);
   }
 
   .form-control {
