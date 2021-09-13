@@ -25,7 +25,7 @@
     "preversion": "npm run build:production",
     "postversion": "git push && git push --tags",
     "start": "cross-env NODE_ENV=development && gulp",
-    "build:production": "cross-env NODE_ENV=production && gulp build && gulp sitemap && npm run -s test && npm run -s cdn",
+    "build:production": "cross-env NODE_ENV=production && gulp build && gulp sitemap && npm run -s test",
     "build:staging": "cross-env NODE_ENV=staging && gulp build && npm run -s test",
     "build:dev": "cross-env NODE_ENV=development && gulp build && npm run -s test",
     "test": "npm run -s lint:js && npm run -s lint:html",
