@@ -138,7 +138,7 @@
       const $email = $form.find('input[name=EMAIL]')
       const $message = $form.find('textarea[name=MESSAGE]')
 
-      const action = $form.attr('action')
+      const action = 'https://manifestinteractive.us5.list-manage.com/subscribe/post-json?u=27a25269993d8a20eeb515305&id=e5b68f2479&c=?'
       const method = $form.attr('method')
 
       let valid = true
@@ -175,6 +175,158 @@
         $message.closest('.form-control-wrap').addClass('has-error')
         $message.closest('.contact-error-msg').fadeIn()
         $message.focus()
+      }
+
+      function divideByChunks (string) {
+        const charArray = []
+
+        while (charArray.length < (string.length / 35)) {
+          charArray.push(string.substring(0, 35))
+          string = string.substring(36)
+        }
+
+        if (charArray.length >= 1 && charArray[charArray.length - 1].length < 10) {
+          charArray[charArray.length - 2] += charArray[charArray.length - 1]
+          charArray.pop()
+        }
+        return charArray
+      }
+
+      function getUniqueCharsInChunk (string) {
+        return getUnique(string).length
+      }
+
+      function getUniqueCharsInArray (array) {
+        const result = []
+        for (let i = 0; i < array.length; i++) {
+          result.push(getUniqueCharsInChunk(array[i]))
+        }
+        return result * 100
+      }
+
+      function getAverage (a) {
+        let sum = 0
+        for (let i = 0; i < a.length; i++) {
+          sum += parseFloat(a[i], 10)
+        }
+        return sum / a.length
+      }
+
+      function getVowelFrequency (string) {
+        let vowelFreq = 0
+        let normalFreq = 0
+        for (let i = 0; i < string.length; i++) {
+          const character = string.charAt(i)
+          if (!character.match(/^[a-zA-Z]+$/)) { continue }
+
+          if (character.match(/^(a|e|i|o|u)$/i)) { vowelFreq++ }
+
+          normalFreq++
+        }
+
+        if (normalFreq !== 0) { return vowelFreq / normalFreq * 100 } else { return 0 }
+      }
+
+      function getWordToCharRatio (string) {
+        const wordArray = string.split(/[\W_]/)
+        return wordArray.length / string.length * 100
+      }
+
+      function getDeviationScore (percentage, lowerBound, upperBound) {
+        if (percentage < lowerBound) { return getBaseLog(lowerBound - percentage, lowerBound) * 100 } else if (percentage > upperBound) { return getBaseLog(percentage - upperBound, 100 - upperBound) * 100 } else { return 0 }
+      }
+
+      function getUnique (s) {
+        const chars = {}
+        let rv = ''
+
+        for (let i = 0; i < s.length; ++i) {
+          if (!(s[i] in chars)) {
+            chars[s[i]] = 1
+            rv += s[i]
+          }
+        }
+
+        return rv
+      }
+
+      function verifyEmpty (str) {
+        return (str.length === 0 || !str.trim())
+      }
+
+      function getBaseLog (x, y) {
+        return Math.log(y) / Math.log(x)
+      }
+
+      function countUpperCaseChars (str) {
+        let count = 0; const len = str.length
+        // Skip first character
+        for (let i = 1; i < len; i++) {
+          if (/[A-Z]/.test(str.charAt(i))) count++
+        }
+        return count
+      }
+
+      function countRareCharacters (str) {
+        let count = 0; const len = str.length
+        // Skip first character
+        for (let i = 1; i < len; i++) {
+          if (/[jqxzJQXZ]/.test(str.charAt(i))) count++
+        }
+        return count
+      }
+
+      function isGibberish (string) {
+        if (verifyEmpty(string)) {
+          return 0
+        }
+
+        const chunks = divideByChunks(string)
+
+        const uniqueCharsInArray = getAverage(getUniqueCharsInArray(chunks))
+        const vowelFrequency = getVowelFrequency(string)
+        const wordToCharRatio = getWordToCharRatio(string)
+
+        const uniqueCharsInArrayDev = Math.max(1, getDeviationScore(uniqueCharsInArray, 45, 50))
+        const vowelFrequencyDev = Math.max(1, getDeviationScore(vowelFrequency, 35, 45))
+        const wordToCharRatioDev = Math.max(1, getDeviationScore(wordToCharRatio, 15, 20))
+
+        const score = Math.max(1, (Math.log10(uniqueCharsInArrayDev) + Math.log10(vowelFrequencyDev) + Math.log10(wordToCharRatioDev)) / 6 * 100)
+
+        if (score > 10) {
+          const words = string.split(' ').length
+          const upperCount = countUpperCaseChars(string)
+
+          if (words === 1 && upperCount > 1) {
+            return true
+          } else if (getVowelFrequency < 15) {
+            return true
+          } else if (countRareCharacters > 1) {
+            return true
+          }
+        }
+
+        return false
+      }
+
+      let SPAM = 0
+
+      if (isGibberish($fname.val())) {
+        SPAM++
+      }
+      if (isGibberish($lname.val())) {
+        SPAM++
+      }
+      if (isGibberish($email.val())) {
+        SPAM++
+      }
+      if (isGibberish($message.val()) || $message.val().split(' ').length < 5) {
+        SPAM++
+      }
+
+      if (SPAM > 0) {
+        valid = false
+        errorMessage = 'SPAM Detected'
       }
 
       // Check for Valid Form
